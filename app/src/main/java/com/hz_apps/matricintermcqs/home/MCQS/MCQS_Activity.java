@@ -1,7 +1,6 @@
-package com.hz_apps.matricintermcqs.ui.home;
+package com.hz_apps.matricintermcqs.home.MCQS;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.TextView;
 

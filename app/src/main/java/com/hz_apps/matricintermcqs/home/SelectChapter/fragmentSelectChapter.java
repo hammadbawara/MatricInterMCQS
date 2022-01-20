@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.ui.home.selectChapter;
+package com.hz_apps.matricintermcqs.home.SelectChapter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
-import com.hz_apps.matricintermcqs.ui.home.MCQS_Activity;
+import com.hz_apps.matricintermcqs.home.MCQS.MCQS_Activity;
 
 public class fragmentSelectChapter extends Fragment {
     RecyclerView SelectChapter_RV;

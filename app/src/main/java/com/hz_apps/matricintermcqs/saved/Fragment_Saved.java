@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.ui.saved;
+package com.hz_apps.matricintermcqs.saved;
 
 import android.os.Bundle;
 
@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.hz_apps.matricintermcqs.R;
-
-import java.util.Objects;
 
 public class Fragment_Saved extends Fragment {
 

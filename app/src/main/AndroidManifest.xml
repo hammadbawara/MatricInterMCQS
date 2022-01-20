@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatricInterMCQS">
         <activity
-            android:name=".ui.Splash_Screen"
+            android:name=".Splash_Screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.MCQS_Activity"
+            android:name=".home.MCQS.MCQS_Activity"
             android:exported="false" />
 
         <meta-data

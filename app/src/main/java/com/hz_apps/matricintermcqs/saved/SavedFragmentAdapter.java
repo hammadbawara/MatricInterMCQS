@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.ui.saved;
+package com.hz_apps.matricintermcqs.saved;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -1,12 +1,11 @@
-package com.hz_apps.matricintermcqs.ui;
+package com.hz_apps.matricintermcqs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.hz_apps.matricintermcqs.MainActivity;
-import com.hz_apps.matricintermcqs.R;
+import com.hz_apps.matricintermcqs.Database.DBHelper;
 
 import java.io.IOException;
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/chooseSubject"
-        android:name="com.hz_apps.matricintermcqs.ui.home.main.ChooseSubject"
+        android:name="com.hz_apps.matricintermcqs.home.SelectBook.ChooseSubject"
         android:label="fragment_choose_subject"
         tools:layout="@layout/fragment_choose_subject" >
         <action
@@ -21,16 +21,16 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectChapter"
-        android:name="com.hz_apps.matricintermcqs.ui.home.selectChapter.fragmentSelectChapter"
+        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.fragmentSelectChapter"
         android:label="fragment_select_chapter"
         tools:layout="@layout/fragment_select_chapter" />
     <fragment
         android:id="@+id/fragment_Saved"
-        android:name="com.hz_apps.matricintermcqs.ui.saved.Fragment_Saved"
+        android:name="com.hz_apps.matricintermcqs.saved.Fragment_Saved"
         android:label="fragment_more"
         tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/fragment_more"
-        android:name="com.hz_apps.matricintermcqs.ui.more.Fragment_more"
+        android:name="com.hz_apps.matricintermcqs.more.Fragment_more"
         android:label="Fragment_more" />
 </navigation>

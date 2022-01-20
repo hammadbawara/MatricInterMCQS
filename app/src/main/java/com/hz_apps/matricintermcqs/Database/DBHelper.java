@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.ui;
+package com.hz_apps.matricintermcqs.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

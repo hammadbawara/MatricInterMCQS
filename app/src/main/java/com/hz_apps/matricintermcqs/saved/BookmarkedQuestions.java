@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.ui.more;
+package com.hz_apps.matricintermcqs.saved;
 
 import android.os.Bundle;
 
@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 
 import com.hz_apps.matricintermcqs.R;
 
-public class Fragment_more extends Fragment {
+public class BookmarkedQuestions extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false);
+        return inflater.inflate(R.layout.fragment_bookmarked_questions, container, false);
+
+
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/round_recyclerview_from_top"
     android:padding="5dp"
-    tools:context=".ui.home.main.ChooseSubject">
+    tools:context=".home.SelectBook.ChooseSubject">
 
     <TextView
         android:id="@+id/textView9"
@@ -115,6 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        tools:listitem="@layout/subject_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
