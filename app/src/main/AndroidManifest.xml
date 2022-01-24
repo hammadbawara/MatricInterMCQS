@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatricInterMCQS">
         <activity
+            android:name=".SignInAndSignUp.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SignInAndSignUp.SignInActivity"
+            android:exported="false" />
+        <activity
             android:name=".Splash_Screen"
             android:exported="true">
             <intent-filter>

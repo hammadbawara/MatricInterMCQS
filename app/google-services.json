@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1042673304617",
+    "project_id": "matric-inter-mcqs",
+    "storage_bucket": "matric-inter-mcqs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042673304617:android:e8ab74604f38deefba8838",
+        "android_client_info": {
+          "package_name": "com.hz_apps.matricintermcqs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042673304617-0qpn406sqpmuv46oio4qah5hi2ic1a4v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTs0ydJYCC1_Z267H_pj-4UsGGibnae50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042673304617-0qpn406sqpmuv46oio4qah5hi2ic1a4v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

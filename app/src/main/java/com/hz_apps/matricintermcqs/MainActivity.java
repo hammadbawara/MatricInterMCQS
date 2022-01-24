@@ -1,11 +1,11 @@
 package com.hz_apps.matricintermcqs;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
