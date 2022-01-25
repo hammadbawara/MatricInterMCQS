@@ -1,21 +1,29 @@
 package com.hz_apps.matricintermcqs.Database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.hz_apps.matricintermcqs.home.MCQS.MCQS;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    private String DB_Name, TableName, DBPath;
-    private Context context;
+    private final String DB_Name;
+    private String TableName;
+    private final String DBPath;
+    private final Context context;
+    private SQLiteDatabase db;
 
     public DBHelper(@Nullable Context context, String db_name,@Nullable String tableName) {
         super(context, db_name, null, 1);
@@ -50,5 +58,34 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public List<MCQS> getMCQSFromDB(){
+        db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if (db !=null){
+            cursor = db.rawQuery("Select * FROM "+ TableName, null);
+        }
+
+        System.out.println("Done 1");
+
+        List<MCQS> mcqsList = new ArrayList<>();
+        int count = 0;
+        if (cursor.getCount() !=0){
+            while (cursor.moveToNext()){
+                System.out.println("Done2 " + ++count);
+                MCQS mcqs = new MCQS();
+                mcqs.setId(cursor.getInt(0));
+                mcqs.setStatement(cursor.getString(1));
+                mcqs.setOptA(cursor.getString(2));
+                mcqs.setOptB(cursor.getString(3));
+                mcqs.setOptC(cursor.getString(4));
+                mcqs.setOptD(cursor.getString(5));
+                char[] ans = cursor.getString(6).toCharArray();
+                mcqs.setAns(ans[0]);
+                mcqsList.add(mcqs);
+            }
+        }
+        return mcqsList;
     }
 }

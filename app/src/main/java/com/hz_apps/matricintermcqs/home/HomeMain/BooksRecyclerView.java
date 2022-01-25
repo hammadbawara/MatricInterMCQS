@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.SelectBook;
+package com.hz_apps.matricintermcqs.home.HomeMain;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,18 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myViewHolder> {
+public class BooksRecyclerView extends RecyclerView.Adapter<BooksRecyclerView.myViewHolder> {
 
     private final Context context;
     private final String[] names;
     private final int[] images;
-    private final SubjectViewOnClick listener;
 
-    public RecyclerAdapter(Context context, String[] names, int[] images, SubjectViewOnClick listener) {
+    public BooksRecyclerView(Context context, String[] names, int[] images) {
         this.context = context;
         this.names = names;
         this.images = images;
-        this.listener = listener;
     }
 
 
@@ -46,7 +44,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
         return names.length;
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public static class myViewHolder extends RecyclerView.ViewHolder{
 
         TextView subject_name;
         ImageView subject_image;
@@ -56,15 +54,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.myView
 
             subject_name = itemView.findViewById(R.id.subject_name);
             subject_image = itemView.findViewById(R.id.subject_icon);
-            itemView.setOnClickListener(this);
         }
-
-        @Override
-        public void onClick(View view) {
-            listener.onClick(itemView, getAdapterPosition());
-        }
-    }
-    interface SubjectViewOnClick{
-        void onClick(View v, int position);
     }
 }

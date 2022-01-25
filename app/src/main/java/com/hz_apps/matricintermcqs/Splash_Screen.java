@@ -20,12 +20,6 @@ public class Splash_Screen extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //Importing Database
-                try {
                     ImportDatabaseFile();
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/round_recyclerview_from_top"
     android:padding="5dp"
-    tools:context=".home.SelectBook.ChooseSubject">
+    tools:context=".home.HomeMain.HomeMainFragment">
 
     <TextView
         android:id="@+id/textView9"
@@ -42,12 +42,12 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:background="@drawable/class_selected"
+        android:background="@drawable/class_unselected"
         android:fontFamily="@font/merriweather"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
         android:text="9"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/class10_TVi"
@@ -60,52 +60,18 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/class_unselected"
-        android:fontFamily="@font/merriweather"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:text="10"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/class9_TVi"
-        app:layout_constraintEnd_toStartOf="@+id/class11_TVi"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/class9_TVi" />
-
-    <TextView
-        android:id="@+id/class11_TVi"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/class_unselected"
-        android:fontFamily="@font/merriweather"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:text="11"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/class10_TVi"
-        app:layout_constraintEnd_toStartOf="@+id/class12_TVi"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/class10_TVi" />
-
-    <TextView
-        android:id="@+id/class12_TVi"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/class_unselected"
         android:fontFamily="@font/merriweather"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:text="12"
+        android:text="10"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/class11_TVi"
+        app:layout_constraintBaseline_toBaselineOf="@+id/class9_TVi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/class11_TVi" />
+        app:layout_constraintStart_toEndOf="@+id/class9_TVi" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ChooseSubject_RV"
@@ -116,6 +82,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/subject_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
