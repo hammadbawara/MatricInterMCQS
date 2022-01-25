@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/chooseSubject">
+    app:startDestination="@id/HomeMain">
 
     <fragment
-        android:id="@+id/chooseSubject"
+        android:id="@+id/HomeMain"
         android:name="com.hz_apps.matricintermcqs.home.HomeMain.HomeMainFragment"
         android:label="fragment_choose_subject"
         tools:layout="@layout/fragment_home_main" >
@@ -21,9 +21,16 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectChapter"
-        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.fragmentSelectChapter"
+        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.FragmentSelectChapter"
         android:label="fragment_select_chapter"
-        tools:layout="@layout/fragment_select_chapter" />
+        tools:layout="@layout/fragment_select_chapter" >
+        <argument
+            android:name="class"
+            app:argType="integer" />
+        <argument
+            android:name="book"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_Saved3"
         android:name="com.hz_apps.matricintermcqs.saved.Fragment_Saved"

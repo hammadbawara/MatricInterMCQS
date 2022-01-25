@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.hz_apps.matricintermcqs.home.MCQS.MCQS;
+import com.hz_apps.matricintermcqs.home.SelectChapter.BookChapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,15 +21,13 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
 
     private final String DB_Name;
-    private String TableName;
     private final String DBPath;
     private final Context context;
     private SQLiteDatabase db;
 
-    public DBHelper(@Nullable Context context, String db_name,@Nullable String tableName) {
+    public DBHelper(@Nullable Context context, String db_name) {
         super(context, db_name, null, 1);
         DB_Name = db_name;
-        TableName = tableName;
         this.context = context;
         DBPath = "data/data/"+ context.getPackageName()+"/databases/";
     }
@@ -60,20 +59,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<MCQS> getMCQSFromDB(){
+    public List<MCQS> getMCQSFromDB(String tableName){
         db = this.getReadableDatabase();
         Cursor cursor = null;
         if (db !=null){
-            cursor = db.rawQuery("Select * FROM "+ TableName, null);
+            cursor = db.rawQuery("Select * FROM "+ tableName, null);
         }
-
-        System.out.println("Done 1");
 
         List<MCQS> mcqsList = new ArrayList<>();
         int count = 0;
         if (cursor.getCount() !=0){
             while (cursor.moveToNext()){
-                System.out.println("Done2 " + ++count);
                 MCQS mcqs = new MCQS();
                 mcqs.setId(cursor.getInt(0));
                 mcqs.setStatement(cursor.getString(1));
@@ -87,5 +83,28 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         return mcqsList;
+    }
+
+    public List<BookChapter> getBookChapters(int Class, int Book){
+        String str_class = String.valueOf(Class);
+        String str_book = String.valueOf(Book);
+        String tableName = "hz" + "10" + str_class +"0"+ str_book;
+        Cursor cursor = null;
+        db = getReadableDatabase();
+        if (db!=null){
+            cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+        }
+
+        List<BookChapter> chapterList = new ArrayList<>();
+
+        if (cursor.getCount() != 0){
+            while (cursor.moveToNext()){
+                BookChapter chapter = new BookChapter();
+                chapter.setChapterNo(cursor.getInt(0));
+                chapter.setChapterName(cursor.getString(1));
+                chapter.setNumberOfQuestion(cursor.getInt(2));
+            }
+        }
+        return chapterList;
     }
 }

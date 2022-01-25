@@ -35,9 +35,9 @@ public class MCQS_Activity extends AppCompatActivity {
         mcqs_statement = findViewById(R.id.mcqs_statement);
         ClickEffectOnOptions();
 
-        DBHelper dbHelper = new DBHelper(this, "MCQS.db", "hz1010101");
+        DBHelper dbHelper = new DBHelper(this, "MCQS.db");
 
-        List<MCQS> mcqsList = dbHelper.getMCQSFromDB();
+        List<MCQS> mcqsList = dbHelper.getMCQSFromDB("hz1010101");
         position = 0;
         binding.nextBtn.setOnClickListener(view -> {
             if (position<mcqsList.size()-1) {

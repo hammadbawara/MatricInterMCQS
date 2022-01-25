@@ -8,9 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
+import com.hz_apps.matricintermcqs.databinding.FragmentHomeMainBinding;
 
 public class BooksRecyclerView extends RecyclerView.Adapter<BooksRecyclerView.myViewHolder> {
 
@@ -37,6 +41,11 @@ public class BooksRecyclerView extends RecyclerView.Adapter<BooksRecyclerView.my
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.subject_name.setText(names[position]);
         holder.subject_image.setImageResource(images[position]);
+        holder.itemView.setOnClickListener(view -> {
+            NavDirections action = HomeMainFragmentDirections
+                    .actionChooseSubjectToFragmentSelectChapter(HomeMainFragment.SelectedClass, position+1);
+            Navigation.findNavController(view).navigate(action);
+        });
     }
 
     @Override

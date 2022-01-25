@@ -23,7 +23,7 @@ public class HomeMainFragment extends Fragment {
     RecyclerView recyclerView;
     FragmentHomeMainBinding binding;
     TextView class9_TVi, class10_TVi;
-    int SelectedClass;
+    static int SelectedClass;
     private final String FragmentName = "HomeMainFragment";
     BooksRecyclerView adapter;
 
@@ -39,8 +39,8 @@ public class HomeMainFragment extends Fragment {
         SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 9);
         changeClass(SelectedClass);
 
-        class9_TVi.setOnClickListener(v -> askBeforeChangingClass( 9));
-        class10_TVi.setOnClickListener(v -> askBeforeChangingClass( 10));
+        class9_TVi.setOnClickListener(v -> askBeforeChangingClass( 1));
+        class10_TVi.setOnClickListener(v -> askBeforeChangingClass( 2));
 
         return binding.getRoot();
     }
@@ -59,7 +59,7 @@ public class HomeMainFragment extends Fragment {
         String[] books = null;
         int[] books_icons = null;
         switch (selectedClass){
-            case 9:
+            case 1:
                 books = getResources().getStringArray(R.array.class_9_books);
                 books_icons = getResources().getIntArray(R.array.class_9_books_icons);
                 //unselect class 10th
@@ -69,7 +69,7 @@ public class HomeMainFragment extends Fragment {
                 class9_TVi.setBackground(getResources().getDrawable(R.drawable.class_selected));
                 class9_TVi.setTextColor(getResources().getColor(R.color.white));
                 break;
-            case 10:
+            case 2:
                 books = getResources().getStringArray(R.array.class_10_books);
                 books_icons = getResources().getIntArray(R.array.class_10_books_icons);
                 //unselect class 9th

@@ -11,14 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
 
+import java.util.List;
+
 public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapterChapter.myViewHolder> {
     private final Context context;
-    private final String[] chapter_names;
+    private final List<BookChapter> chapterList;
     private final ChapterViewOnClick listener;
 
-    public RecyclerAdapterChapter(Context context, String[] chapter_names, ChapterViewOnClick listener) {
+    public RecyclerAdapterChapter(Context context, List<BookChapter> chapterList, ChapterViewOnClick listener) {
         this.context = context;
-        this.chapter_names = chapter_names;
+        this.chapterList = chapterList;
         this.listener = listener;
     }
 
@@ -31,13 +33,14 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterChapter.myViewHolder holder, int position) {
-            holder.chapter_name_TVi.setText(chapter_names[position]);
-            holder.chapter_number.setText((position + 1) +".");
+        BookChapter chapter = chapterList.get(position);
+        holder.chapter_name_TVi.setText(chapter.getChapterName());
+        holder.chapter_number.setText((chapter.getChapterNo() + ""));
     }
 
     @Override
     public int getItemCount() {
-        return chapter_names.length;
+        return chapterList.size();
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

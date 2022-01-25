@@ -31,7 +31,7 @@ public class Splash_Screen extends AppCompatActivity {
 
     }
     private void ImportDatabaseFile() throws IOException {
-        DBHelper dbHelper = new DBHelper(Splash_Screen.this, "MCQS.db", null);
+        DBHelper dbHelper = new DBHelper(Splash_Screen.this, "MCQS.db");
         if (!dbHelper.isDatabaseExist()) {
             dbHelper.copyFileFromAssetToDatabaseFolder();
         }
