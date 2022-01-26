@@ -11,38 +11,44 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
-import com.hz_apps.matricintermcqs.R;
-import com.hz_apps.matricintermcqs.home.MCQS.MCQS_Activity;
+import com.hz_apps.matricintermcqs.databinding.FragmentSelectChapterBinding;
+import com.hz_apps.matricintermcqs.home.MCQS.MCQsActivity;
 
 import java.util.List;
 
-public class FragmentSelectChapter extends Fragment {
-    RecyclerView SelectChapter_RV;
-    View view;
+public class SelectChapterFragment extends Fragment {
+    private RecyclerView recyclerview;
+    FragmentSelectChapterBinding binding;
     RecyclerAdapterChapter.ChapterViewOnClick listener;
-    int selectedClass;
+    int selectedClass, selectedBook;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_select_chapter, container, false);
+        binding = FragmentSelectChapterBinding.inflate(getLayoutInflater());
 
-        selectedClass = FragmentSelectChapterArgs.fromBundle(getArguments()).getClass();
-        int selectedBook = FragmentSelectChapterArgs.fromBundle(getArguments()).getBook();
+
+        recyclerview = binding.SelectChapterRV;
+
+        selectedClass = SelectChapterFragmentArgs.fromBundle(getArguments()).getClassName();
+        selectedBook = SelectChapterFragmentArgs.fromBundle(getArguments()).getBook();
         DBHelper dbHelper = new DBHelper(getContext(), "MCQS.db");
         List<BookChapter> chapterList = dbHelper.getBookChapters(selectedClass, selectedBook);
 
         clickListener();
         RecyclerAdapterChapter adapterChapter = new RecyclerAdapterChapter(getContext(), chapterList , listener);
-        SelectChapter_RV.setAdapter(adapterChapter);
-        SelectChapter_RV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerview.setAdapter(adapterChapter);
+        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        return view;
+        return binding.getRoot();
     }
     void clickListener(){
         listener = (view, position) -> {
-            Intent intent = new Intent(getActivity(), MCQS_Activity.class);
+            Intent intent = new Intent(getActivity(), MCQsActivity.class);
+            intent.putExtra("selectedClass", selectedClass);
+            intent.putExtra("selectedBook", selectedBook);
+            intent.putExtra("selectedChapter", position+1);
             startActivity(intent);
         };
     }

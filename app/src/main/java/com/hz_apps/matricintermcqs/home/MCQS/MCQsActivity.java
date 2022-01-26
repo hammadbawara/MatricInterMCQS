@@ -14,13 +14,14 @@ import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 
 import java.util.List;
 
-public class MCQS_Activity extends AppCompatActivity {
+public class MCQsActivity extends AppCompatActivity {
 
     TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement;
     int selectedOption = 0;
     AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
     int position;
+    int selectedClass, selectedBook, selectedChapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,11 @@ public class MCQS_Activity extends AppCompatActivity {
         ClickEffectOnOptions();
 
         DBHelper dbHelper = new DBHelper(this, "MCQS.db");
-
-        List<MCQS> mcqsList = dbHelper.getMCQSFromDB("hz1010101");
+        selectedClass = getIntent().getIntExtra("selectedClass", 1);
+        selectedBook = getIntent().getIntExtra("selectedBook", 1);
+        selectedChapter = getIntent().getIntExtra("selectedChapter", 1);
+        String tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
+        List<MCQS> mcqsList = dbHelper.getMCQSFromDB(tableCode);
         position = 0;
         binding.nextBtn.setOnClickListener(view -> {
             if (position<mcqsList.size()-1) {
@@ -79,10 +83,10 @@ public class MCQS_Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        alertdialog = new AlertDialog.Builder(MCQS_Activity.this);
+        alertdialog = new AlertDialog.Builder(MCQsActivity.this);
         alertdialog.setMessage("Do you really want to end test?")
                 .setPositiveButton("Yes", (dialog, which) ->
-                        MCQS_Activity.super.onBackPressed())
+                        MCQsActivity.super.onBackPressed())
                 .setNegativeButton("No", (dialog, which) -> {}).show();
 
     }

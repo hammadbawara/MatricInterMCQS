@@ -28,7 +28,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".home.MCQS.MCQS_Activity"
+            android:name=".home.MCQS.MCQsActivity"
             android:exported="false" />
 
         <meta-data

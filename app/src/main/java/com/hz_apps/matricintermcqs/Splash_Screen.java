@@ -20,8 +20,9 @@ public class Splash_Screen extends AppCompatActivity {
             @Override
             public void run(){
                 try {
+                    sleep(2000);
                     ImportDatabaseFile();
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
                 startActivity(new Intent(Splash_Screen.this, MainActivity.class));

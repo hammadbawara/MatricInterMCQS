@@ -13,19 +13,18 @@
         <action
             android:id="@+id/action_chooseSubject_to_fragmentSelectChapter"
             app:destination="@id/fragmentSelectChapter"
-            app:enterAnim="@anim/from_right_to_left_enter"
-            app:exitAnim="@anim/from_left_to_right_exit"
-            app:launchSingleTop="false"
-            app:popEnterAnim="@anim/from_left_to_right_enter"
-            app:popExitAnim="@anim/from_right_to_left_exit" />
+            app:enterAnim="@anim/slide_right_to_left_enter"
+            app:exitAnim="@anim/slide_right_to_left_exit"
+            app:popEnterAnim="@anim/slide_left_to_right_enter"
+            app:popExitAnim="@anim/slide_left_to_right_exit" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectChapter"
-        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.FragmentSelectChapter"
+        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.SelectChapterFragment"
         android:label="fragment_select_chapter"
         tools:layout="@layout/fragment_select_chapter" >
         <argument
-            android:name="class"
+            android:name="className"
             app:argType="integer" />
         <argument
             android:name="book"

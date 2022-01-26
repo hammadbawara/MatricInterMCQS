@@ -42,8 +42,7 @@ public class BooksRecyclerView extends RecyclerView.Adapter<BooksRecyclerView.my
         holder.subject_name.setText(names[position]);
         holder.subject_image.setImageResource(images[position]);
         holder.itemView.setOnClickListener(view -> {
-            NavDirections action = HomeMainFragmentDirections
-                    .actionChooseSubjectToFragmentSelectChapter(HomeMainFragment.SelectedClass, position+1);
+            NavDirections action = HomeMainFragmentDirections.actionChooseSubjectToFragmentSelectChapter(HomeMainFragment.SelectedClass, position+1);
             Navigation.findNavController(view).navigate(action);
         });
     }

@@ -36,7 +36,7 @@ public class HomeMainFragment extends Fragment {
         class9_TVi = binding.class9TVi;
         class10_TVi = binding.class10TVi;
 
-        SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 9);
+        SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
         changeClass(SelectedClass);
 
         class9_TVi.setOnClickListener(v -> askBeforeChangingClass( 1));

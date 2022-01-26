@@ -1,5 +1,6 @@
 package com.hz_apps.matricintermcqs.Database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, db_name, null, 1);
         DB_Name = db_name;
         this.context = context;
+        assert context != null;
         DBPath = "data/data/"+ context.getPackageName()+"/databases/";
     }
 
@@ -38,6 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public void copyFileFromAssetToDatabaseFolder() throws IOException {
         InputStream inputStream = context.getAssets().open(DB_Name);
+        new File(DBPath).mkdir();
         OutputStream outputStream = new FileOutputStream(DBPath+DB_Name);
         byte[] buffer = new byte[1024];
         int length;
@@ -59,7 +62,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<MCQS> getMCQSFromDB(String tableName){
+    @SuppressLint("Recycle")
+    public List<MCQS> getMCQSFromDB(String tableCode){
+        String tableName = "hz" + generateTableCode(Long.parseLong(tableCode));
         db = this.getReadableDatabase();
         Cursor cursor = null;
         if (db !=null){
@@ -67,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         List<MCQS> mcqsList = new ArrayList<>();
-        int count = 0;
+        assert cursor != null;
         if (cursor.getCount() !=0){
             while (cursor.moveToNext()){
                 MCQS mcqs = new MCQS();
@@ -85,26 +90,35 @@ public class DBHelper extends SQLiteOpenHelper {
         return mcqsList;
     }
 
+    @SuppressLint("Recycle")
     public List<BookChapter> getBookChapters(int Class, int Book){
-        String str_class = String.valueOf(Class);
-        String str_book = String.valueOf(Book);
-        String tableName = "hz" + "10" + str_class +"0"+ str_book;
+        long tableCoder = Long.parseLong("10" + Class +"0"+ Book);
+        String tableName = "hz" + generateTableCode(tableCoder);
+
         Cursor cursor = null;
+
         db = getReadableDatabase();
         if (db!=null){
             cursor = db.rawQuery("SELECT * FROM " + tableName, null);
         }
-
         List<BookChapter> chapterList = new ArrayList<>();
-
+        assert cursor != null;
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
                 BookChapter chapter = new BookChapter();
                 chapter.setChapterNo(cursor.getInt(0));
                 chapter.setChapterName(cursor.getString(1));
                 chapter.setNumberOfQuestion(cursor.getInt(2));
+                chapterList.add(chapter);
             }
         }
         return chapterList;
+    }
+
+    private long generateTableCode(long x){
+        x ^= (x << 21);
+        x ^= (x >> 35);
+        x ^= (x << 4);
+        return x;
     }
 }
