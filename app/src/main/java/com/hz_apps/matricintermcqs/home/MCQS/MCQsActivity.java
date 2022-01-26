@@ -1,9 +1,11 @@
 package com.hz_apps.matricintermcqs.home.MCQS;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,18 +18,23 @@ import java.util.List;
 
 public class MCQsActivity extends AppCompatActivity {
 
-    TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement;
-    int selectedOption = 0;
-    AlertDialog.Builder alertdialog;
+    private TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement;
+    private int selectedOption = 0;
+    private AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
-    int position;
-    int selectedClass, selectedBook, selectedChapter;
+    private int position;
+    private int selectedClass, selectedBook, selectedChapter;
+    private List<MCQS> mcqsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMcqsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading MCQs");
+        progressDialog.setCancelable(false);
 
         OptionA = findViewById(R.id.OptionA);
         OptionB = findViewById(R.id.OptionB);
@@ -41,19 +48,14 @@ public class MCQsActivity extends AppCompatActivity {
         selectedBook = getIntent().getIntExtra("selectedBook", 1);
         selectedChapter = getIntent().getIntExtra("selectedChapter", 1);
         String tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
-        List<MCQS> mcqsList = dbHelper.getMCQSFromDB(tableCode);
+        mcqsList = dbHelper.getMCQSFromDB(tableCode);
         position = 0;
+        showMCQSonTextView();
+
         binding.nextBtn.setOnClickListener(view -> {
-            if (position<mcqsList.size()-1) {
-                position++;
-                MCQS mcqs = mcqsList.get(position);
-                mcqs_statement.setText(Html.fromHtml(mcqs.getStatement()));
-                OptionA.setText(Html.fromHtml(mcqs.getOptA()));
-                OptionB.setText(Html.fromHtml(mcqs.getOptB()));
-                OptionC.setText(Html.fromHtml(mcqs.getOptC()));
-                OptionD.setText(Html.fromHtml(mcqs.getOptD()));
-            }
+            showMCQSonTextView();
         });
+        progressDialog.dismiss();
     }
     void ClickEffectOnOptions(){
         OptionA.setOnClickListener(v -> setBackgroundOnOption(OptionA, 1));
@@ -89,5 +91,20 @@ public class MCQsActivity extends AppCompatActivity {
                         MCQsActivity.super.onBackPressed())
                 .setNegativeButton("No", (dialog, which) -> {}).show();
 
+    }
+
+    private void showMCQSonTextView(){
+        if (position<mcqsList.size()-1) {
+            MCQS mcqs = mcqsList.get(position);
+            mcqs_statement.setText(Html.fromHtml(mcqs.getStatement()));
+            OptionA.setText(Html.fromHtml(mcqs.getOptA()));
+            OptionB.setText(Html.fromHtml(mcqs.getOptB()));
+            OptionC.setText(Html.fromHtml(mcqs.getOptC()));
+            OptionD.setText(Html.fromHtml(mcqs.getOptD()));
+            position++;
+        }
+        else{
+            Toast.makeText(this, "No More MCQs", Toast.LENGTH_SHORT).show();
+        }
     }
 }

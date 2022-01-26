@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
+import com.hz_apps.matricintermcqs.Splash_Screen;
 import com.hz_apps.matricintermcqs.databinding.FragmentHomeMainBinding;
 
 public class HomeMainFragment extends Fragment {
