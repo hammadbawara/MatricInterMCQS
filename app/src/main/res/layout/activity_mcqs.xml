@@ -60,6 +60,7 @@
                 android:text="Option 1"
                 android:textAlignment="center"
                 android:textSize="18sp"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +81,7 @@
                 android:text="Option 3"
                 android:textAlignment="center"
                 android:textSize="18sp"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +102,7 @@
                 android:text="Option 2"
                 android:textAlignment="center"
                 android:textSize="18sp"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,6 +123,7 @@
                 android:text="Option 4"
                 android:textAlignment="center"
                 android:textSize="18sp"
+                android:foreground="?attr/selectableItemBackground"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,14 +143,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
         android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Next"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:srcCompat="@drawable/ic_next" />
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:padding="8dp"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

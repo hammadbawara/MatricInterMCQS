@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_mcqs_option.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_option_selected.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/wrong_mcqs_option.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_back.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_next.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/selected_mcqs_option.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_mcqs.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_in.xml" value="0.2359375" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_splash_screen.xml" value="0.12708333333333333" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment__saved.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_choose_subject.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_home_main.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_more.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_saved_test.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_select_chapter.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

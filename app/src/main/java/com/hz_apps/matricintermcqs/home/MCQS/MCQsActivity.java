@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
-import com.hz_apps.matricintermcqs.R;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 
 import java.util.List;
@@ -19,12 +18,14 @@ import java.util.List;
 public class MCQsActivity extends AppCompatActivity {
 
     private TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement;
-    private int selectedOption = 0;
     private AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
     private int position;
     private int selectedClass, selectedBook, selectedChapter;
     private List<MCQS> mcqsList;
+    public static short[] answers;
+    MCQsFunctionality mcqsFun;
+    TextView[] AllOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,51 +37,70 @@ public class MCQsActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading MCQs");
         progressDialog.setCancelable(false);
 
-        OptionA = findViewById(R.id.OptionA);
-        OptionB = findViewById(R.id.OptionB);
-        OptionC = findViewById(R.id.OptionC);
-        OptionD = findViewById(R.id.OptionD);
-        mcqs_statement = findViewById(R.id.mcqs_statement);
-        ClickEffectOnOptions();
+        OptionA = binding.OptionA;
+        OptionB = binding.OptionB;
+        OptionC = binding.OptionC;
+        OptionD = binding.OptionD;
+        AllOptions = new TextView[] {OptionA, OptionB, OptionC, OptionD};
+        mcqs_statement = binding.mcqsStatement;
 
+        mcqsFun = new MCQsFunctionality();
+
+        //All Options
+        OptionA.setOnClickListener(view -> {
+            mcqsFun.setAllOptionsUnselected(AllOptions);
+            answers[position] = 1;
+            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
+        });
+        OptionB.setOnClickListener(view -> {
+            mcqsFun.setAllOptionsUnselected(AllOptions);
+            answers[position] = 2;
+            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
+        });
+        OptionC.setOnClickListener(view -> {
+            mcqsFun.setAllOptionsUnselected(AllOptions);
+            answers[position] = 3;
+            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
+        });
+        OptionD.setOnClickListener(view -> {
+            mcqsFun.setAllOptionsUnselected(AllOptions);
+            answers[position] = 4;
+            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
+        });
+
+        //Get MCQs from database
         DBHelper dbHelper = new DBHelper(this, "MCQS.db");
         selectedClass = getIntent().getIntExtra("selectedClass", 1);
         selectedBook = getIntent().getIntExtra("selectedBook", 1);
         selectedChapter = getIntent().getIntExtra("selectedChapter", 1);
         String tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
         mcqsList = dbHelper.getMCQSFromDB(tableCode);
-        position = 0;
-        showMCQSonTextView();
 
+        int numberOfMCQs = mcqsList.size();
+        answers = new short[numberOfMCQs];
+        position = 0;
+        showMCQsOnTextView();
+
+        //Next Button
         binding.nextBtn.setOnClickListener(view -> {
-            showMCQSonTextView();
+            if (position<numberOfMCQs-1){
+                position++;
+                showMCQsOnTextView();
+            }else{
+                Toast.makeText(this, "No more MCQs", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Back Button
+        binding.backBtn.setOnClickListener(view -> {
+            if (position>0){
+                position--;
+                showMCQsOnTextView();
+            }else{
+                Toast.makeText(this, "No more MCQs", Toast.LENGTH_SHORT).show();
+            }
         });
         progressDialog.dismiss();
-    }
-    void ClickEffectOnOptions(){
-        OptionA.setOnClickListener(v -> setBackgroundOnOption(OptionA, 1));
-        OptionB.setOnClickListener(v -> setBackgroundOnOption(OptionB, 2));
-        OptionC.setOnClickListener(v -> setBackgroundOnOption(OptionC, 3));
-        OptionD.setOnClickListener(v -> setBackgroundOnOption(OptionD, 4));
-    }
-    @SuppressLint("UseCompatLoadingForDrawables")
-    void setBackgroundOnOption(TextView option, int option_number){
-        switch (selectedOption){
-            case 1:
-                OptionA.setBackground(getResources().getDrawable(R.drawable.unselected_option));
-                break;
-            case 2:
-                OptionB.setBackground(getResources().getDrawable(R.drawable.unselected_option));
-                break;
-            case 3:
-                OptionC.setBackground(getResources().getDrawable(R.drawable.unselected_option));
-                break;
-            case 4:
-                OptionD.setBackground(getResources().getDrawable(R.drawable.unselected_option));
-                break;
-        }
-        option.setBackground(getResources().getDrawable(R.drawable.selected_mcqs_option));
-        selectedOption = option_number;
     }
 
     @Override
@@ -93,18 +113,32 @@ public class MCQsActivity extends AppCompatActivity {
 
     }
 
-    private void showMCQSonTextView(){
-        if (position<mcqsList.size()-1) {
-            MCQS mcqs = mcqsList.get(position);
-            mcqs_statement.setText(Html.fromHtml(mcqs.getStatement()));
-            OptionA.setText(Html.fromHtml(mcqs.getOptA()));
-            OptionB.setText(Html.fromHtml(mcqs.getOptB()));
-            OptionC.setText(Html.fromHtml(mcqs.getOptC()));
-            OptionD.setText(Html.fromHtml(mcqs.getOptD()));
-            position++;
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void showMCQsOnTextView(){
+        MCQS mcqs = mcqsList.get(position);
+        mcqs_statement.setText(Html.fromHtml(mcqs.getStatement()));
+        OptionA.setText(Html.fromHtml(mcqs.getOptA()));
+        OptionB.setText(Html.fromHtml(mcqs.getOptB()));
+        OptionC.setText(Html.fromHtml(mcqs.getOptC()));
+        OptionD.setText(Html.fromHtml(mcqs.getOptD()));
+
+        mcqsFun.setAllOptionsUnselected(AllOptions);
+
+        switch (answers[position]){
+            case 1:
+                mcqsFun.setOptionSelected(OptionA);
+                break;
+            case 2:
+                mcqsFun.setOptionSelected(OptionB);
+                break;
+            case 3:
+                mcqsFun.setOptionSelected(OptionC);
+                break;
+            case 4:
+                mcqsFun.setOptionSelected(OptionD);
+                break;
         }
-        else{
-            Toast.makeText(this, "No More MCQs", Toast.LENGTH_SHORT).show();
-        }
+
     }
+
 }
