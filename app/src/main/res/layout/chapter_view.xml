@@ -21,7 +21,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/chapter_background"
             android:padding="3dp">
 
             <TextView
@@ -34,7 +33,6 @@
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:text="1"
-                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +47,6 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="8dp"
                 android:text="Chapter Name"
-                android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/chapter_number"

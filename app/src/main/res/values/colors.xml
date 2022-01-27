@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    -->
-
     <color name="purple_200">#3F51B5</color>
     <color name="purple_500">#3353FB</color>
     <color name="purple_700">#FF3700B3</color>v
@@ -17,4 +11,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#253697</color>
     <color name="green">#1C9300</color>
+    <color name="light_blue">#EEF7FF</color>
 </resources>

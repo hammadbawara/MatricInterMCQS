@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.hz_apps.matricintermcqs.R;
 import com.hz_apps.matricintermcqs.Splash_Screen;
 import com.hz_apps.matricintermcqs.databinding.FragmentHomeMainBinding;
+
+import java.util.Arrays;
 
 public class HomeMainFragment extends Fragment {
 
@@ -58,11 +61,11 @@ public class HomeMainFragment extends Fragment {
     @SuppressLint("UseCompatLoadingForDrawables")
     private void changeClass(int selectedClass){
         String[] books = null;
-        int[] books_icons = null;
+        TypedArray books_icons = null;
         switch (selectedClass){
             case 1:
                 books = getResources().getStringArray(R.array.class_9_books);
-                books_icons = getResources().getIntArray(R.array.class_9_books_icons);
+                books_icons = getResources().obtainTypedArray(R.array.class_9_books_icons);
                 //unselect class 10th
                 class10_TVi.setBackground(getResources().getDrawable(R.drawable.class_unselected));
                 class10_TVi.setTextColor(getResources().getColor(R.color.black));
@@ -72,7 +75,7 @@ public class HomeMainFragment extends Fragment {
                 break;
             case 2:
                 books = getResources().getStringArray(R.array.class_10_books);
-                books_icons = getResources().getIntArray(R.array.class_10_books_icons);
+                books_icons = getResources().obtainTypedArray(R.array.class_10_books_icons);
                 //unselect class 9th
                 class9_TVi.setBackground(getResources().getDrawable(R.drawable.class_unselected));
                 class9_TVi.setTextColor(getResources().getColor(R.color.black));
