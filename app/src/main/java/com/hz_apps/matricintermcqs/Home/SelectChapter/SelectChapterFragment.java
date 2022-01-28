@@ -23,6 +23,7 @@ public class SelectChapterFragment extends Fragment {
     FragmentSelectChapterBinding binding;
     RecyclerAdapterChapter.ChapterViewOnClick listener;
     int selectedClass, selectedBook;
+    List<BookChapter> chapterList;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,7 +39,7 @@ public class SelectChapterFragment extends Fragment {
         selectedClass = SelectChapterFragmentArgs.fromBundle(getArguments()).getClassName();
         selectedBook = SelectChapterFragmentArgs.fromBundle(getArguments()).getBook();
         DBHelper dbHelper = new DBHelper(getContext(), "MCQS.db");
-        List<BookChapter> chapterList = dbHelper.getBookChapters(selectedClass, selectedBook);
+        chapterList = dbHelper.getBookChapters(selectedClass, selectedBook);
 
         clickListener();
         RecyclerAdapterChapter adapterChapter = new RecyclerAdapterChapter(getContext(), chapterList , listener);
@@ -54,6 +55,7 @@ public class SelectChapterFragment extends Fragment {
             intent.putExtra("selectedClass", selectedClass);
             intent.putExtra("selectedBook", selectedBook);
             intent.putExtra("selectedChapter", chapter);
+            intent.putExtra("chapterName", chapterList.get(chapter).getChapterName());
             startActivity(intent);
         };
     }

@@ -5,6 +5,7 @@
 
     <string-array name="class_9_books">
         <item>Physics</item>
+        <item>Chemistry</item>
     </string-array>
 
     <integer-array name="class_9_books_icons">

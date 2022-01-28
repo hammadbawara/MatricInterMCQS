@@ -6,10 +6,6 @@ import com.hz_apps.matricintermcqs.R;
 
 public class MCQsFunctionality {
 
-
-    public MCQsFunctionality() {
-    }
-
     public void setOptionSelected(TextView option){
         option.setBackgroundResource(R.drawable.selected_mcqs_option);
     }
@@ -32,6 +28,10 @@ public class MCQsFunctionality {
         option.setBackgroundResource(R.drawable.wrong_mcqs_option);
     }
 
+    /*
+    This method take all options, user selected option and correct answer.
+    Fist it set 'red' color on user selected option and then it set 'green' color on right option.
+     */
     public void checkMCQsOption(TextView[] AllOptions, short chosen, char correctAnswer){
 
         setWrongOptionSelected(AllOptions[chosen-1]);
