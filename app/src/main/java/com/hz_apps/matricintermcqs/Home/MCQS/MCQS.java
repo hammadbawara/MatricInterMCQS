@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.MCQS;
+package com.hz_apps.matricintermcqs.Home.MCQS;
 
 public class MCQS {
     private int id;

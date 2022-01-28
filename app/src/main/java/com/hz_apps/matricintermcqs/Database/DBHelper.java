@@ -8,8 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.hz_apps.matricintermcqs.home.MCQS.MCQS;
-import com.hz_apps.matricintermcqs.home.SelectChapter.BookChapter;
+import com.hz_apps.matricintermcqs.Home.MCQS.MCQS;
+import com.hz_apps.matricintermcqs.Home.SelectChapter.BookChapter;
 
 import java.io.File;
 import java.io.FileOutputStream;

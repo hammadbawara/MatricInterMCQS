@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/HomeMain"
-        android:name="com.hz_apps.matricintermcqs.home.HomeMain.HomeMainFragment"
-        android:label="fragment_choose_subject"
-        tools:layout="@layout/fragment_home_main" >
+        android:name="com.hz_apps.matricintermcqs.Home.HomeMain.HomeMainFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home_main">
         <action
             android:id="@+id/action_chooseSubject_to_fragmentSelectChapter"
             app:destination="@id/fragmentSelectChapter"
@@ -20,8 +20,8 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSelectChapter"
-        android:name="com.hz_apps.matricintermcqs.home.SelectChapter.SelectChapterFragment"
-        android:label="fragment_select_chapter"
+        android:name="com.hz_apps.matricintermcqs.Home.SelectChapter.SelectChapterFragment"
+        android:label="{BookName}"
         tools:layout="@layout/fragment_select_chapter" >
         <argument
             android:name="className"
@@ -29,15 +29,18 @@
         <argument
             android:name="book"
             app:argType="integer" />
+        <argument
+            android:name="BookName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragment_Saved3"
         android:name="com.hz_apps.matricintermcqs.saved.Fragment_Saved"
-        android:label="fragment__saved"
+        android:label="Saved"
         tools:layout="@layout/fragment__saved" />
     <fragment
         android:id="@+id/fragment_more"
         android:name="com.hz_apps.matricintermcqs.more.Fragment_more"
-        android:label="fragment__saved"
+        android:label="More"
         tools:layout="@layout/fragment_more" />
 </navigation>

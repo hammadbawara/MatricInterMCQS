@@ -1,7 +1,8 @@
-package com.hz_apps.matricintermcqs.home.MCQS;
+package com.hz_apps.matricintermcqs.Home.MCQS;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
 import android.widget.TextView;
@@ -17,10 +18,10 @@ import java.util.List;
 
 public class MCQsActivity extends AppCompatActivity {
 
-    private TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement;
+    private TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement, questionNum;
     private AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
-    private int position;
+    private int position, numberOfMCQs;
     private int selectedClass, selectedBook, selectedChapter;
     private List<MCQS> mcqsList;
     public static short[] answers;
@@ -33,6 +34,8 @@ public class MCQsActivity extends AppCompatActivity {
         binding = ActivityMcqsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading MCQs");
         progressDialog.setCancelable(false);
@@ -41,6 +44,8 @@ public class MCQsActivity extends AppCompatActivity {
         OptionB = binding.OptionB;
         OptionC = binding.OptionC;
         OptionD = binding.OptionD;
+        questionNum = binding.questionNum;
+
         AllOptions = new TextView[] {OptionA, OptionB, OptionC, OptionD};
         mcqs_statement = binding.mcqsStatement;
 
@@ -76,7 +81,7 @@ public class MCQsActivity extends AppCompatActivity {
         String tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
         mcqsList = dbHelper.getMCQSFromDB(tableCode);
 
-        int numberOfMCQs = mcqsList.size();
+        numberOfMCQs = mcqsList.size();
         answers = new short[numberOfMCQs];
         position = 0;
         showMCQsOnTextView();
@@ -138,6 +143,9 @@ public class MCQsActivity extends AppCompatActivity {
                 mcqsFun.setOptionSelected(OptionD);
                 break;
         }
+
+        //update question number on textView
+        questionNum.setText(position+1+"/"+numberOfMCQs);
 
     }
 

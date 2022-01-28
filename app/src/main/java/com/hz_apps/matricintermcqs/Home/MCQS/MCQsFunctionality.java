@@ -1,6 +1,5 @@
-package com.hz_apps.matricintermcqs.home.MCQS;
+package com.hz_apps.matricintermcqs.Home.MCQS;
 
-import android.content.Context;
 import android.widget.TextView;
 
 import com.hz_apps.matricintermcqs.R;

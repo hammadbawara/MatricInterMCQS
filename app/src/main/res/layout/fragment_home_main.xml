@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/round_recyclerview_from_top"
     android:padding="5dp"
-    tools:context=".home.HomeMain.HomeMainFragment">
+    tools:context=".Home.HomeMain.HomeMainFragment">
 
     <TextView
         android:id="@+id/textView9"

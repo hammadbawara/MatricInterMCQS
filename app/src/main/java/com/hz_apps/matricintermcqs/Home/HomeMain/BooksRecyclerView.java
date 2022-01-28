@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.HomeMain;
+package com.hz_apps.matricintermcqs.Home.HomeMain;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -41,7 +41,7 @@ public class BooksRecyclerView extends RecyclerView.Adapter<BooksRecyclerView.my
         holder.subject_name.setText(names[position]);
         holder.subject_image.setImageResource(images.getResourceId(position, 0));
         holder.itemView.setOnClickListener(view -> {
-            NavDirections action = HomeMainFragmentDirections.actionChooseSubjectToFragmentSelectChapter(HomeMainFragment.SelectedClass, position+1);
+            NavDirections action = HomeMainFragmentDirections.actionChooseSubjectToFragmentSelectChapter(HomeMainFragment.SelectedClass, position+1, names[position]);
             Navigation.findNavController(view).navigate(action);
         });
     }

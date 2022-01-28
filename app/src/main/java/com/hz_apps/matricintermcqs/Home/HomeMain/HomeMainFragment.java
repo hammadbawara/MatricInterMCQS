@@ -1,9 +1,8 @@
-package com.hz_apps.matricintermcqs.home.HomeMain;
+package com.hz_apps.matricintermcqs.Home.HomeMain;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,10 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.R;
-import com.hz_apps.matricintermcqs.Splash_Screen;
 import com.hz_apps.matricintermcqs.databinding.FragmentHomeMainBinding;
-
-import java.util.Arrays;
 
 public class HomeMainFragment extends Fragment {
 

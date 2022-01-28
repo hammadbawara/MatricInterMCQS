@@ -11,10 +11,10 @@
         android:theme="@style/Theme.MatricInterMCQS">
         <activity
             android:name=".SignInAndSignUp.SignUpActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".SignInAndSignUp.SignInActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".Splash_Screen"
             android:exported="true">
@@ -28,7 +28,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".home.MCQS.MCQsActivity"
+            android:name=".Home.MCQS.MCQsActivity"
             android:exported="false" />
 
         <meta-data

@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.SelectChapter;
+package com.hz_apps.matricintermcqs.Home.SelectChapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

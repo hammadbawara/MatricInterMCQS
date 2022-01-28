@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.SelectChapter;
+package com.hz_apps.matricintermcqs.Home.SelectChapter;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.databinding.FragmentSelectChapterBinding;
-import com.hz_apps.matricintermcqs.home.MCQS.MCQsActivity;
+import com.hz_apps.matricintermcqs.Home.MCQS.MCQsActivity;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.home.SelectChapter;
+package com.hz_apps.matricintermcqs.Home.SelectChapter;
 
 public class BookChapter {
     private int chapterNo;
