@@ -6,6 +6,10 @@ import com.hz_apps.matricintermcqs.R;
 
 public class MCQsFunctionality {
 
+    public MCQsFunctionality(){
+
+    }
+
     public void setOptionSelected(TextView option){
         option.setBackgroundResource(R.drawable.selected_mcqs_option);
     }

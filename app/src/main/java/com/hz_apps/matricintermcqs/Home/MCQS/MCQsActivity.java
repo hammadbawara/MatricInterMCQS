@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 
+import java.util.Arrays;
 import java.util.List;
 
     /*
@@ -42,6 +44,8 @@ public class MCQsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         //This prevent screen from rotation
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        binding.toolbarMcqsActivity.setNavigationOnClickListener(view -> onBackPressed());
+        mcqsFun = new MCQsFunctionality();
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading MCQs");
@@ -55,8 +59,6 @@ public class MCQsActivity extends AppCompatActivity {
         questionNum = binding.questionNum;
         mcqs_statement = binding.mcqsStatement;
         AllOptions = new TextView[] {OptionA, OptionB, OptionC, OptionD};
-
-        mcqsFun = new MCQsFunctionality();
 
         /*
         When someone click on option. First it will remove drawable from all the options
@@ -89,6 +91,9 @@ public class MCQsActivity extends AppCompatActivity {
         selectedBook = getIntent().getIntExtra("selectedBook", 1);
         selectedChapter = getIntent().getIntExtra("selectedChapter", 1);
         String chapterName = getIntent().getStringExtra("chapterName");
+
+        //set chapter name
+        binding.chapterNameMcqsActivity.setText(chapterName);
 
         //Get MCQs from database
         DBHelper dbHelper = new DBHelper(this, "MCQS.db");

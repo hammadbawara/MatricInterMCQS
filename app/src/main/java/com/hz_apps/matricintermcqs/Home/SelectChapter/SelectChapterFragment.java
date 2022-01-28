@@ -50,12 +50,12 @@ public class SelectChapterFragment extends Fragment {
         return binding.getRoot();
     }
     void clickListener(){
-        listener = (view, chapter) -> {
+        listener = (position, chapter) -> {
             Intent intent = new Intent(getActivity(), MCQsActivity.class);
             intent.putExtra("selectedClass", selectedClass);
             intent.putExtra("selectedBook", selectedBook);
             intent.putExtra("selectedChapter", chapter);
-            intent.putExtra("chapterName", chapterList.get(chapter).getChapterName());
+            intent.putExtra("chapterName", chapterList.get(position).getChapterName());
             startActivity(intent);
         };
     }

@@ -43,7 +43,7 @@
                 android:id="@+id/chapter_name_TVi"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/merriweather"
+                android:fontFamily="@font/roboto"
                 android:paddingTop="8dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="8dp"

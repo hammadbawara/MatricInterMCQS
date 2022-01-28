@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v21/unselected_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_mcqs_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_option_selected.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/wrong_mcqs_option.xml" value="0.2275" />
