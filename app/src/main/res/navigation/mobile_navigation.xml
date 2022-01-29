@@ -43,4 +43,9 @@
         android:name="com.hz_apps.matricintermcqs.more.Fragment_more"
         android:label="More"
         tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/testSetupFragment"
+        android:name="com.hz_apps.matricintermcqs.Home.TestSetup.TestSetupFragment"
+        android:label="fragment_test_setup"
+        tools:layout="@layout/fragment_test_setup" />
 </navigation>

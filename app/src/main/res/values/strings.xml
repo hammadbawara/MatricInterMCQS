@@ -15,9 +15,12 @@
         <item>@drawable/ico_biology</item>
     </integer-array>
 
-    <string-array name="class_10_books"></string-array>
-
+    <string-array name="class_10_books">
+        <item>Physics</item>
+        <item>Chemistry</item>
+    </string-array>
     <integer-array name="class_10_books_icons">
         <item>@drawable/ico_physics</item>
+        <item>@drawable/ico_chemistry</item>
     </integer-array>
 </resources>

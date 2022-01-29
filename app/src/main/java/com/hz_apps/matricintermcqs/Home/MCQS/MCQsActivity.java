@@ -103,7 +103,10 @@ public class MCQsActivity extends AppCompatActivity {
         This table code is used for generating table name and then that table name is used
         to get data from database.
          */
-        String tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
+        String tableCode = "";
+        if (selectedChapter<10) tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
+        else tableCode = "10" + selectedClass + "0" + selectedBook + selectedChapter;
+        //Getting MCQs list from Database
         mcqsList = dbHelper.getMCQSFromDB(tableCode);
 
         numberOfMCQs = mcqsList.size();
