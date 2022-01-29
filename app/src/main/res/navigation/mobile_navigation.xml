@@ -32,6 +32,13 @@
         <argument
             android:name="BookName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentSelectChapter_to_testSetupFragment"
+            app:destination="@id/testSetupFragment"
+            app:enterAnim="@anim/slide_right_to_left_enter"
+            app:exitAnim="@anim/slide_right_to_left_exit"
+            app:popEnterAnim="@anim/slide_left_to_right_enter"
+            app:popExitAnim="@anim/slide_left_to_right_exit"/>
     </fragment>
     <fragment
         android:id="@+id/fragment_Saved3"
@@ -46,6 +53,20 @@
     <fragment
         android:id="@+id/testSetupFragment"
         android:name="com.hz_apps.matricintermcqs.Home.TestSetup.TestSetupFragment"
-        android:label="fragment_test_setup"
-        tools:layout="@layout/fragment_test_setup" />
+        android:label="{ChapterName}"
+        tools:layout="@layout/fragment_test_setup" >
+        <argument
+            android:name="selectedClass"
+            app:argType="integer" />
+        <argument
+            android:name="Book"
+            app:argType="integer" />
+        <argument
+            android:name="Chapter"
+            app:argType="integer" />
+        <argument
+            android:name="ChapterName"
+            app:argType="string"
+            />
+    </fragment>
 </navigation>

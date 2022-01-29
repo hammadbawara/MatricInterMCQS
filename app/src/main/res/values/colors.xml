@@ -12,4 +12,6 @@
     <color name="blue">#253697</color>
     <color name="green">#1C9300</color>
     <color name="light_blue">#EEF7FF</color>
+    <color name="light_green">#00C808</color>
+    <color name="light_red">#FF1100</color>
 </resources>

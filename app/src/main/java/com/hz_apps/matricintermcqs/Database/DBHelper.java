@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -64,7 +65,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Recycle")
     public List<MCQS> getMCQSFromDB(String tableCode){
-        String tableName = "hz" + generateTableCode(Long.parseLong(tableCode));
+        String tableName = generateTableName(Long.parseLong(tableCode));
         db = this.getReadableDatabase();
         Cursor cursor = null;
         if (db !=null){
@@ -93,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @SuppressLint("Recycle")
     public List<BookChapter> getBookChapters(int Class, int Book){
         long tableCoder = Long.parseLong("10" + Class +"0"+ Book);
-        String tableName = "hz" + generateTableCode(tableCoder);
+        String tableName = generateTableName(tableCoder);
 
         Cursor cursor = null;
 
@@ -115,10 +116,64 @@ public class DBHelper extends SQLiteOpenHelper {
         return chapterList;
     }
 
-    private long generateTableCode(long x){
+    public int getNumberOfMCQs(String tableName){
+        int numberOfMCQs = 0;
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + tableName, null);
+        if (cursor.getCount()!=0){
+            while(cursor.moveToNext())
+                numberOfMCQs = cursor.getInt(0);
+        }
+        return numberOfMCQs;
+    }
+
+    public List<MCQS> getMCQsWithRowId(String tableName, int start, int end){
+        db = getReadableDatabase();
+        Cursor cursor = null;
+        if (db!=null){
+            cursor = db.rawQuery("SELECT * FROM " + tableName + " WHERE rowid BETWEEN " + start + " AND " + end, null);
+        }
+        List<MCQS> mcqsList = new ArrayList<>();
+        if (cursor!=null){
+            while (cursor.moveToNext()){
+                MCQS mcqs = new MCQS();
+                mcqs.setId(cursor.getInt(0));
+                mcqs.setStatement(cursor.getString(1));
+                mcqs.setOptA(cursor.getString(2));
+                mcqs.setOptB(cursor.getString(3));
+                mcqs.setOptC(cursor.getString(4));
+                mcqs.setOptD(cursor.getString(5));
+                char[] ans = cursor.getString(6).toCharArray();
+                mcqs.setAns(ans[0]);
+                mcqsList.add(mcqs);
+            }
+        }
+        return mcqsList;
+    }
+
+    public String[] getQuote(){
+        db = getReadableDatabase();
+        Random random = new Random();
+        int position = random.nextInt(62);
+        Cursor cursor = null;
+        if (db !=null){
+            cursor = db.rawQuery("SELECT quote, author FROM quotes WHERE rowid = " + ++position, null);
+        }
+        String[] quote = new String[2];
+        if (cursor!=null){
+            while (cursor.moveToNext()){
+                quote[0] = cursor.getString(0);
+                quote[1] = cursor.getString(1);
+            }
+        }
+        return quote;
+    }
+
+    public String generateTableName(long x){
         x ^= (x << 21);
         x ^= (x >> 35);
         x ^= (x << 4);
-        return x;
+        return "hz" + x;
     }
+
 }

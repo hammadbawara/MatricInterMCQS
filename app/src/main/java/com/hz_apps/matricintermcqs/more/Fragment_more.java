@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.hz_apps.matricintermcqs.R;
 import com.hz_apps.matricintermcqs.databinding.FragmentMoreBinding;
 
 public class Fragment_more extends Fragment {

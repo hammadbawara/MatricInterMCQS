@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 
-import java.util.Arrays;
 import java.util.List;
 
     /*
@@ -87,13 +85,12 @@ public class MCQsActivity extends AppCompatActivity {
         });
 
         //Getting information from previous fragment
-        selectedClass = getIntent().getIntExtra("selectedClass", 1);
-        selectedBook = getIntent().getIntExtra("selectedBook", 1);
-        selectedChapter = getIntent().getIntExtra("selectedChapter", 1);
-        String chapterName = getIntent().getStringExtra("chapterName");
+        String TestTitle = getIntent().getStringExtra("testTitle");
+        String TableName = getIntent().getStringExtra("TableName");
+        int[] testMCQs = getIntent().getIntArrayExtra("TestMCQS");
 
         //set chapter name
-        binding.chapterNameMcqsActivity.setText(chapterName);
+        binding.chapterNameMcqsActivity.setText(TestTitle);
 
         //Get MCQs from database
         DBHelper dbHelper = new DBHelper(this, "MCQS.db");
@@ -103,11 +100,8 @@ public class MCQsActivity extends AppCompatActivity {
         This table code is used for generating table name and then that table name is used
         to get data from database.
          */
-        String tableCode = "";
-        if (selectedChapter<10) tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
-        else tableCode = "10" + selectedClass + "0" + selectedBook + selectedChapter;
         //Getting MCQs list from Database
-        mcqsList = dbHelper.getMCQSFromDB(tableCode);
+        mcqsList = dbHelper.getMCQsWithRowId(TableName, testMCQs[0], testMCQs[1]);
 
         numberOfMCQs = mcqsList.size();
         answers = new short[numberOfMCQs];

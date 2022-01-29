@@ -1,7 +1,6 @@
 package com.hz_apps.matricintermcqs.Home.SelectChapter;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +8,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.databinding.FragmentSelectChapterBinding;
-import com.hz_apps.matricintermcqs.Home.MCQS.MCQsActivity;
 
 import java.util.List;
 
@@ -50,13 +50,13 @@ public class SelectChapterFragment extends Fragment {
         return binding.getRoot();
     }
     void clickListener(){
-        listener = (position, chapter) -> {
-            Intent intent = new Intent(getActivity(), MCQsActivity.class);
-            intent.putExtra("selectedClass", selectedClass);
-            intent.putExtra("selectedBook", selectedBook);
-            intent.putExtra("selectedChapter", chapter);
-            intent.putExtra("chapterName", chapterList.get(position).getChapterName());
-            startActivity(intent);
+        listener = new RecyclerAdapterChapter.ChapterViewOnClick() {
+            @Override
+            public void onClick(View view, int position, int chapter) {
+                NavDirections action = SelectChapterFragmentDirections
+                        .actionFragmentSelectChapterToTestSetupFragment(selectedClass, selectedBook, chapter, chapterList.get(position).getChapterName());
+                Navigation.findNavController(view).navigate(action);
+            }
         };
     }
 }
