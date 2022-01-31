@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.Database.UserDatabase;
 import com.hz_apps.matricintermcqs.Home.TestSetup.Test;
-import com.hz_apps.matricintermcqs.MainActivity;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 import com.hz_apps.matricintermcqs.databinding.InputEditTextViewBinding;
 

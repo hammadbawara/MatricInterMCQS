@@ -1,4 +1,4 @@
-package com.hz_apps.matricintermcqs.saved.SavedTest;
+package com.hz_apps.matricintermcqs.Database;
 
 public class SavedTest {
     private String className;
