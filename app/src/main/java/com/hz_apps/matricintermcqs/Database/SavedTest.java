@@ -1,11 +1,13 @@
 package com.hz_apps.matricintermcqs.Database;
 
 public class SavedTest {
+    private int id;
     private String TestTitle;
     private String className;
     private String subject;
     private String tableName;
     private int position;
+
 
     public SavedTest(){
 
@@ -55,5 +57,13 @@ public class SavedTest {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

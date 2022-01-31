@@ -12,13 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.hz_apps.matricintermcqs.Database.DBHelper;
 import com.hz_apps.matricintermcqs.Database.UserDatabase;
-import com.hz_apps.matricintermcqs.Home.TestSetup.Test;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 import com.hz_apps.matricintermcqs.databinding.InputEditTextViewBinding;
 
-import java.io.Serializable;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
     /*
@@ -70,13 +69,13 @@ public class MCQsActivity extends AppCompatActivity {
 
         //Getting information from previous fragment
         String testTitle = getIntent().getStringExtra("TestTitle");
+        position = getIntent().getIntExtra("Position", 0);
         mcqsList = (List<MCQS>) getIntent().getSerializableExtra("MCQsList");
 
         //set chapter name
         binding.chapterNameMcqsActivity.setText(testTitle);
 
         numberOfMCQs = mcqsList.size();
-        position = 0;
         setMCQsOnTextViews();
 
         //Next Button
@@ -151,6 +150,8 @@ public class MCQsActivity extends AppCompatActivity {
 
     private void askUserSaveTestNameDialog(){
         InputEditTextViewBinding binding = InputEditTextViewBinding.inflate(getLayoutInflater());
+        Calendar calendar = new GregorianCalendar();
+        binding.inputEditText.setText(calendar.getTime().toString());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setView(binding.getRoot());
         dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

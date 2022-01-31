@@ -31,13 +31,14 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     }
 
-    public List<SavedTest> getAllSavedTests(){
+    public List<SavedTest> getAllSavedTestsList(){
         db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM savedTest", null);
         List<SavedTest> savedTestList = new ArrayList<>();
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
                 SavedTest test = new SavedTest();
+                test.setId(cursor.getInt(0));
                 test.setTestTitle(cursor.getString(1));
                 test.setClassName(cursor.getString(2));
                 test.setSubject(cursor.getString(3));
@@ -77,4 +78,32 @@ public class UserDatabase extends SQLiteOpenHelper {
         values.put("Position", position);
         db.insert("savedTest", null, values);
     }
+
+    public List<MCQS> getSavedTest(String tableName){
+        db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
+        List<MCQS> mcqsList = new ArrayList<>();
+        while (cursor.moveToNext()){
+            MCQS mcqs = new MCQS();
+            mcqs.setStatement(cursor.getString(1));
+            mcqs.setOptA(cursor.getString(2));
+            mcqs.setOptB(cursor.getString(3));
+            mcqs.setOptC(cursor.getString(4));
+            mcqs.setOptD(cursor.getString(5));
+            mcqs.setAns(cursor.getString(6).toCharArray()[0]);
+            mcqs.setUserAns(cursor.getString(7).toCharArray()[0]);
+            mcqsList.add(mcqs);
+        }
+
+        return mcqsList;
+
+    }
+
+    public void deleteSavedTest(int id, String tableName){
+        db = getWritableDatabase();
+        db.execSQL("DELETE FROM savedTest WHERE id=" + id );
+        db.execSQL("DROP TABLE " + tableName);
+    }
+
+
 }
