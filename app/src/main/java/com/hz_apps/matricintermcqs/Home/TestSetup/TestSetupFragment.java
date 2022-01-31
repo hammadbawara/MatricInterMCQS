@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
+import com.hz_apps.matricintermcqs.Home.MCQS.MCQS;
 import com.hz_apps.matricintermcqs.Home.MCQS.MCQsActivity;
 import com.hz_apps.matricintermcqs.databinding.FragmentTestSetupBinding;
+
+import java.io.Serializable;
+import java.util.List;
 
 public class TestSetupFragment extends Fragment {
     int selectedClass, selectedBook, selectedChapter;
@@ -21,6 +25,7 @@ public class TestSetupFragment extends Fragment {
     RecyclerView recyclerView;
     TestGenerator testGenerator;
     Test[] tests;
+    DBHelper dbHelper;
 
     TestsRecyclerAdapter.SetClickListenerOnTest listener;
     @Override
@@ -29,7 +34,7 @@ public class TestSetupFragment extends Fragment {
         binding = FragmentTestSetupBinding.inflate(getLayoutInflater());
         setClickListener();
         testGenerator = new TestGenerator();
-        DBHelper dbHelper = new DBHelper(getContext(), "MCQS.db");
+        dbHelper = new DBHelper(getContext(), "MCQS.db");
 
         selectedClass = TestSetupFragmentArgs.fromBundle(getArguments()).getSelectedClass();
         selectedBook = TestSetupFragmentArgs.fromBundle(getArguments()).getBook();
@@ -54,9 +59,10 @@ public class TestSetupFragment extends Fragment {
         listener = new TestsRecyclerAdapter.SetClickListenerOnTest() {
             @Override
             public void onClick(int position) {
+                List<MCQS> mcqsList = dbHelper.getMCQsWithRowId(tableName, tests[position].getStartPosition(), tests[position].getEndPosition());
                 Intent intent = new Intent(getActivity(), MCQsActivity.class);
-                intent.putExtra("TestObject", tests[position]);
-                intent.putExtra("TableName", tableName);
+                intent.putExtra("MCQsList", (Serializable) mcqsList);
+                intent.putExtra("TestTitle", tests[position].getTitle());
                 startActivity(intent);
             }
         };

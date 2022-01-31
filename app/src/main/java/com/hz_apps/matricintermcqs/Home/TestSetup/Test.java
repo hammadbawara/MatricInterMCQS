@@ -1,8 +1,6 @@
 package com.hz_apps.matricintermcqs.Home.TestSetup;
 
-import java.io.Serializable;
-
-public class Test implements Serializable {
+public class Test {
     private String title;
     private int numberOfQuestions;
     private int startPosition;

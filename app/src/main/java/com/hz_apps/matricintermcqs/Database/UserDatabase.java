@@ -23,7 +23,7 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE savedTest(id INTEGER PRIMARY KEY AUTOINCREMENT, TestTitle TEXT, ClassName TEXT, SubjectName TEXT, TableName TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE savedTest(id INTEGER PRIMARY KEY AUTOINCREMENT, TestTitle TEXT, ClassName TEXT, SubjectName TEXT, TableName TEXT, Position INTEGER)");
     }
 
     @Override
@@ -38,15 +38,18 @@ public class UserDatabase extends SQLiteOpenHelper {
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
                 SavedTest test = new SavedTest();
-                test.setClassName(cursor.getString(1));
-                test.setSubject(cursor.getString(2));
-                test.setTableName(cursor.getString(3));
+                test.setTestTitle(cursor.getString(1));
+                test.setClassName(cursor.getString(2));
+                test.setSubject(cursor.getString(3));
+                test.setTableName(cursor.getString(4));
+                test.setPosition(5);
+                savedTestList.add(test);
             }
         }
         return savedTestList;
     }
 
-    public void saveTest(List<MCQS> mcqsList, String TestTitle, String ClassName, String SubjectName){
+    public void saveTest(List<MCQS> mcqsList, String TestTitle, int position, String ClassName, String SubjectName){
         db = getWritableDatabase();
         Calendar calendar = new GregorianCalendar();
         String tableName = "st" + calendar.getTimeInMillis();
@@ -71,6 +74,7 @@ public class UserDatabase extends SQLiteOpenHelper {
         values.put("ClassName", ClassName);
         values.put("SubjectName", SubjectName);
         values.put("TableName", tableName);
+        values.put("Position", position);
         db.insert("savedTest", null, values);
     }
 }

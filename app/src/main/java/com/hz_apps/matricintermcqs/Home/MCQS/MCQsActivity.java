@@ -18,6 +18,7 @@ import com.hz_apps.matricintermcqs.Home.TestSetup.Test;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 import com.hz_apps.matricintermcqs.databinding.InputEditTextViewBinding;
 
+import java.io.Serializable;
 import java.util.List;
 
     /*
@@ -68,22 +69,11 @@ public class MCQsActivity extends AppCompatActivity {
         setClickListenerOnAllOptions(AllOptions);
 
         //Getting information from previous fragment
-        String TableName = getIntent().getStringExtra("TableName");
-        Test test = (Test) getIntent().getSerializableExtra("TestObject");
+        String testTitle = getIntent().getStringExtra("TestTitle");
+        mcqsList = (List<MCQS>) getIntent().getSerializableExtra("MCQsList");
 
         //set chapter name
-        binding.chapterNameMcqsActivity.setText(test.getTitle());
-
-        //Get MCQs from database
-        DBHelper dbHelper = new DBHelper(this, "MCQS.db");
-
-        /*
-        This generate database table code on the basis of user class, book and chapter.
-        This table code is used for generating table name and then that table name is used
-        to get data from database.
-         */
-        //Getting MCQs list from Database
-        mcqsList = dbHelper.getMCQsWithRowId(TableName, test.getStartPosition(), test.getEndPosition());
+        binding.chapterNameMcqsActivity.setText(testTitle);
 
         numberOfMCQs = mcqsList.size();
         position = 0;
@@ -173,7 +163,7 @@ public class MCQsActivity extends AppCompatActivity {
             String testTitle = binding.inputEditText.getText().toString();
             if (!testTitle.isEmpty()){
                 UserDatabase userDatabase = new UserDatabase(this);
-                userDatabase.saveTest(mcqsList, testTitle, "9th", "Physics");
+                userDatabase.saveTest(mcqsList, testTitle, position, "9th", "Physics");
             }
             else binding.inputEditText.setError("Assign some name to saved Test");
             MCQsActivity.super.onBackPressed();

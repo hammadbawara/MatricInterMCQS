@@ -1,6 +1,8 @@
 package com.hz_apps.matricintermcqs.Home.MCQS;
 
-public class MCQS {
+import java.io.Serializable;
+
+public class MCQS implements Serializable {
     private int id;
     private String statement, optA, optB, optC, optD;
     private char ans, userAns;

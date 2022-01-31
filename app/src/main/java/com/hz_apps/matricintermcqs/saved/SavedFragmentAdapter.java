@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.hz_apps.matricintermcqs.saved.Bookmark.BookmarkedQuestions;
+import com.hz_apps.matricintermcqs.saved.SavedTest.SavedTestFragment;
+
 public class SavedFragmentAdapter extends FragmentStateAdapter {
     public SavedFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
