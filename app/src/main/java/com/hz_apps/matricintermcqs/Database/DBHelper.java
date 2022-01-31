@@ -92,9 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Recycle")
-    public List<BookChapter> getBookChapters(int Class, int Book){
-        long tableCoder = Long.parseLong("10" + Class +"0"+ Book);
-        String tableName = generateTableName(tableCoder);
+    public List<BookChapter> getBookChapters(String tableName){
 
         Cursor cursor = null;
 
@@ -103,7 +101,6 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor = db.rawQuery("SELECT * FROM " + tableName, null);
         }
         List<BookChapter> chapterList = new ArrayList<>();
-        assert cursor != null;
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
                 BookChapter chapter = new BookChapter();

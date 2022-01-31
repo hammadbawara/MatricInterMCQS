@@ -15,11 +15,11 @@ public class SavedFragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new SavedTest();
+                return new SavedTestFragment();
             case 1:
                 return new BookmarkedQuestions();
         }
-        return new SavedTest();
+        return new SavedTestFragment();
     }
 
     @Override

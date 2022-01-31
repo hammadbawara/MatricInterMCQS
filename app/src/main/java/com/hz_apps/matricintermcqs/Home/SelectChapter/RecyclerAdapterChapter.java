@@ -26,13 +26,13 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
 
     @NonNull
     @Override
-    public RecyclerAdapterChapter.myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.chapter_view, parent, false);
         return new myViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapterChapter.myViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         BookChapter chapter = chapterList.get(position);
         holder.chapter_name_TVi.setText(chapter.getChapterName());
         holder.chapter_number.setText((String.valueOf(chapter.getChapterNo())));
