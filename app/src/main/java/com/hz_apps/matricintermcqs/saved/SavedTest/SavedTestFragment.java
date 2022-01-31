@@ -36,7 +36,6 @@ public class SavedTestFragment extends Fragment {
         savedTestList = database.getAllSavedTestsList();
 
         SavedTestRecyclerAdapter adapter = new SavedTestRecyclerAdapter(getContext(), savedTestList, listener);
-        System.out.println("saved tests " + savedTestList.size());
         RecyclerView recyclerView = binding.recyclerViewSavedTest;
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

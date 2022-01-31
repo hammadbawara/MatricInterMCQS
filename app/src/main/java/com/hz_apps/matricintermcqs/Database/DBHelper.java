@@ -154,10 +154,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public String[] getQuote(){
         db = getReadableDatabase();
         Random random = new Random();
-        int position = random.nextInt(62);
+        int quoteNumber = random.nextInt(90);
         Cursor cursor = null;
         if (db !=null){
-            cursor = db.rawQuery("SELECT quote, author FROM quotes WHERE rowid = " + ++position, null);
+            cursor = db.rawQuery("SELECT quote, author FROM quotes WHERE rowid = " + ++quoteNumber, null);
         }
         String[] quote = new String[2];
         if (cursor!=null){

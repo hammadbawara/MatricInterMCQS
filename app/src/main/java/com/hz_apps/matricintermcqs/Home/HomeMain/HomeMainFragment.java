@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -44,20 +45,16 @@ public class HomeMainFragment extends Fragment {
         SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
         changeClass(SelectedClass);
 
-        class9_TVi.setOnClickListener(v -> askBeforeChangingClass( 1));
-        class10_TVi.setOnClickListener(v -> askBeforeChangingClass( 2));
+        class9_TVi.setOnClickListener(view -> {
+            changeClass(1);
+        });
+        class10_TVi.setOnClickListener(view -> {
+            changeClass(2);
+        });
 
         return binding.getRoot();
     }
 
-    private void askBeforeChangingClass(int selectedClass){
-        new AlertDialog.Builder(getContext()).setMessage("Do you really want to change class?")
-                .setPositiveButton("Yes", (dialogInterface, i) -> {
-                    changeClass(selectedClass);
-                }).setNegativeButton("No", (dialogInterface, i) -> {
-
-                }).setCancelable(false).show();
-    }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private void changeClass(int selectedClass){
@@ -90,6 +87,9 @@ public class HomeMainFragment extends Fragment {
         adapter = new BooksRecyclerView(getContext(), books, books_icons);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+        //Toast
+        Toast.makeText(getContext(), "Class Changed 👍", Toast.LENGTH_SHORT).show();
 
         //saved selected class in sharedPreference
         SelectedClass = selectedClass;
