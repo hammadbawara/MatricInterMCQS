@@ -39,12 +39,12 @@ public class SelectChapterFragment extends Fragment {
         selectedClass = SelectChapterFragmentArgs.fromBundle(getArguments()).getClassName();
         selectedBook = SelectChapterFragmentArgs.fromBundle(getArguments()).getBook();
         DBHelper dbHelper = new DBHelper(getContext(), "MCQS.db");
-        chapterList = dbHelper.getBookChapters(selectedClass, selectedBook);
+        String tableName = dbHelper.generateTableName(Long.parseLong("10" + selectedClass +"0"+ selectedBook));
+        chapterList = dbHelper.getBookChapters(tableName);
 
         clickListener();
         RecyclerAdapterChapter adapterChapter = new RecyclerAdapterChapter(getContext(), chapterList , listener);
         recyclerview.setAdapter(adapterChapter);
-        recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         progressDialog.dismiss();
         return binding.getRoot();
