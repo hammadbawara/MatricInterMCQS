@@ -3,7 +3,7 @@ package com.hz_apps.matricintermcqs.Home.MCQS;
 public class MCQS {
     private int id;
     private String statement, optA, optB, optC, optD;
-    private char ans, userAns;
+    private char ans;
 
     public MCQS(){
 
@@ -73,13 +73,5 @@ public class MCQS {
 
     public void setAns(char ans) {
         this.ans = ans;
-    }
-
-    public char getUserAns() {
-        return userAns;
-    }
-
-    public void setUserAns(char userAns) {
-        this.userAns = userAns;
     }
 }

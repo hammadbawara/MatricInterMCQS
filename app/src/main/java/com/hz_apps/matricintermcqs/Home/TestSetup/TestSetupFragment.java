@@ -20,7 +20,7 @@ public class TestSetupFragment extends Fragment {
     FragmentTestSetupBinding binding;
     RecyclerView recyclerView;
     TestGenerator testGenerator;
-    Test[] tests;
+    int[][] tests;
 
     TestsRecyclerAdapter.SetClickListenerOnTest listener;
     @Override
@@ -43,7 +43,9 @@ public class TestSetupFragment extends Fragment {
         int numberOfQuestion = dbHelper.getNumberOfMCQs(tableName);
         tests = testGenerator.generateTest(numberOfQuestion);
 
-        TestsRecyclerAdapter adapter = new TestsRecyclerAdapter(getContext(), tests, listener);
+        System.out.println("Length " + testGenerator.TestsWithName.length);
+
+        TestsRecyclerAdapter adapter = new TestsRecyclerAdapter(getContext(), testGenerator.TestsWithName, listener);
         recyclerView = binding.recyclerViewTestSetup;
         recyclerView.setAdapter(adapter);
 
@@ -55,8 +57,9 @@ public class TestSetupFragment extends Fragment {
             @Override
             public void onClick(int position) {
                 Intent intent = new Intent(getActivity(), MCQsActivity.class);
-                intent.putExtra("TestObject", tests[position]);
+                intent.putExtra("testTitle", testGenerator.TestsWithName[position].getTitle());
                 intent.putExtra("TableName", tableName);
+                intent.putExtra("TestMCQS", tests[position]);
                 startActivity(intent);
             }
         };
