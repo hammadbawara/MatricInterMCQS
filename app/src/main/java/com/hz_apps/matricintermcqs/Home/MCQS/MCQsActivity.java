@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
+import com.hz_apps.matricintermcqs.Home.TestSetup.Test;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 
 import java.util.List;
@@ -29,9 +30,7 @@ public class MCQsActivity extends AppCompatActivity {
     private AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
     private int position, numberOfMCQs;
-    private int selectedClass, selectedBook, selectedChapter;
-    private List<MCQS> mcqsList;
-    public static short[] answers;
+    public static List<MCQS> mcqsList;
     MCQsFunctionality mcqsFun;
     TextView[] AllOptions;
 
@@ -63,34 +62,14 @@ public class MCQsActivity extends AppCompatActivity {
         then it will set 'red' on the selected option. After that it set 'green' on the right option.
         if user clicked (or selected) on right option then that option color become 'green' else it remain red.
          */
-        OptionA.setOnClickListener(view -> {
-            mcqsFun.setAllOptionsUnselected(AllOptions);
-            answers[position] = 1;
-            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
-        });
-        OptionB.setOnClickListener(view -> {
-            mcqsFun.setAllOptionsUnselected(AllOptions);
-            answers[position] = 2;
-            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
-        });
-        OptionC.setOnClickListener(view -> {
-            mcqsFun.setAllOptionsUnselected(AllOptions);
-            answers[position] = 3;
-            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
-        });
-        OptionD.setOnClickListener(view -> {
-            mcqsFun.setAllOptionsUnselected(AllOptions);
-            answers[position] = 4;
-            mcqsFun.checkMCQsOption(AllOptions, answers[position], mcqsList.get(position).getAns());
-        });
+        setClickListenerOnAllOptions(AllOptions);
 
         //Getting information from previous fragment
-        String TestTitle = getIntent().getStringExtra("testTitle");
         String TableName = getIntent().getStringExtra("TableName");
-        int[] testMCQs = getIntent().getIntArrayExtra("TestMCQS");
+        Test test = (Test) getIntent().getSerializableExtra("TestObject");
 
         //set chapter name
-        binding.chapterNameMcqsActivity.setText(TestTitle);
+        binding.chapterNameMcqsActivity.setText(test.getTitle());
 
         //Get MCQs from database
         DBHelper dbHelper = new DBHelper(this, "MCQS.db");
@@ -101,10 +80,9 @@ public class MCQsActivity extends AppCompatActivity {
         to get data from database.
          */
         //Getting MCQs list from Database
-        mcqsList = dbHelper.getMCQsWithRowId(TableName, testMCQs[0], testMCQs[1]);
+        mcqsList = dbHelper.getMCQsWithRowId(TableName, test.getStartPosition(), test.getEndPosition());
 
         numberOfMCQs = mcqsList.size();
-        answers = new short[numberOfMCQs];
         position = 0;
         setMCQsOnTextViews();
 
@@ -141,20 +119,9 @@ public class MCQsActivity extends AppCompatActivity {
 
         //Unselect all options for new MCQs
         mcqsFun.setAllOptionsUnselected(AllOptions);
-        switch (answers[position]){
-            case 1:
-                mcqsFun.setOptionSelected(OptionA);
-                break;
-            case 2:
-                mcqsFun.setOptionSelected(OptionB);
-                break;
-            case 3:
-                mcqsFun.setOptionSelected(OptionC);
-                break;
-            case 4:
-                mcqsFun.setOptionSelected(OptionD);
-                break;
-        }
+        //set option as selected that user last time selected
+        TextView option = mcqsFun.getOptionByChar(AllOptions, mcqs.getUserAns());
+        if (option != null) mcqsFun.setOptionSelected(option);
 
         //Update question number on the top right corner of Toolbar
         questionNum.setText(position+1+"/"+numberOfMCQs);
@@ -170,6 +137,19 @@ public class MCQsActivity extends AppCompatActivity {
                         MCQsActivity.super.onBackPressed())
                 .setNegativeButton("No", (dialog, which) -> {}).show();
 
+    }
+
+    private void setClickListenerOnAllOptions(TextView[] options){
+        char[] choice = new char[] {'A', 'B', 'C', 'D'};
+        for (int i=0; i< options.length; i++){
+            int finalI = i;
+            options[i].setOnClickListener(view -> {
+                //Unselect Previous Option
+                MCQS mcqs = mcqsList.get(position);
+                mcqs.setUserAns(choice[finalI]);
+                mcqsFun.checkMCQsOption(options, mcqs.getUserAns(), mcqs.getAns());
+            });
+        }
     }
 
 }
