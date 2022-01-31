@@ -1,16 +1,22 @@
 package com.hz_apps.matricintermcqs.Home.TestSetup;
 
-public class Test {
+import java.io.Serializable;
+
+public class Test implements Serializable {
     private String title;
     private int numberOfQuestions;
+    private int startPosition;
+    private int endPosition;
 
     public Test(){
 
     }
 
-    public Test(String title, int numberOfQuestions) {
+    public Test(String title, int numberOfQuestions, int startPosition, int endPosition) {
         this.title = title;
         this.numberOfQuestions = numberOfQuestions;
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
     }
 
     public String getTitle() {
@@ -27,5 +33,21 @@ public class Test {
 
     public void setNumberOfQuestions(int numberOfQuestions) {
         this.numberOfQuestions = numberOfQuestions;
+    }
+
+    public int getStartPosition() {
+        return startPosition;
+    }
+
+    public void setStartPosition(int startPosition) {
+        this.startPosition = startPosition;
+    }
+
+    public int getEndPosition() {
+        return endPosition;
+    }
+
+    public void setEndPosition(int endPosition) {
+        this.endPosition = endPosition;
     }
 }
