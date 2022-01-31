@@ -2,6 +2,7 @@ package com.hz_apps.matricintermcqs.Home.MCQS;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
@@ -12,8 +13,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
+import com.hz_apps.matricintermcqs.Database.UserDatabase;
 import com.hz_apps.matricintermcqs.Home.TestSetup.Test;
+import com.hz_apps.matricintermcqs.MainActivity;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
+import com.hz_apps.matricintermcqs.databinding.InputEditTextViewBinding;
 
 import java.util.List;
 
@@ -135,7 +139,11 @@ public class MCQsActivity extends AppCompatActivity {
         alertdialog.setMessage("Do you really want to end test?")
                 .setPositiveButton("Yes", (dialog, which) ->
                         MCQsActivity.super.onBackPressed())
-                .setNegativeButton("No", (dialog, which) -> {}).show();
+                .setNegativeButton("No", (dialog, which) -> {});
+        alertdialog.setNeutralButton("Save Test", (dialogInterface, i) -> {
+            askUserSaveTestNameDialog();
+        });
+        alertdialog.show();
 
     }
 
@@ -150,6 +158,29 @@ public class MCQsActivity extends AppCompatActivity {
                 mcqsFun.checkMCQsOption(options, mcqs.getUserAns(), mcqs.getAns());
             });
         }
+    }
+
+    private void askUserSaveTestNameDialog(){
+        InputEditTextViewBinding binding = InputEditTextViewBinding.inflate(getLayoutInflater());
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setView(binding.getRoot());
+        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.setPositiveButton("Save", (dialogInterface, i) -> {
+            String testTitle = binding.inputEditText.getText().toString();
+            if (!testTitle.isEmpty()){
+                UserDatabase userDatabase = new UserDatabase(this);
+                userDatabase.saveTest(mcqsList, testTitle, "9th", "Physics");
+            }
+            else binding.inputEditText.setError("Assign some name to saved Test");
+            MCQsActivity.super.onBackPressed();
+            Toast.makeText(this, "Test Saved", Toast.LENGTH_SHORT).show();
+        });
+        dialog.show();
     }
 
 }

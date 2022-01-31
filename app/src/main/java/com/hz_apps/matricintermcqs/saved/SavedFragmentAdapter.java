@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.hz_apps.matricintermcqs.saved.SavedTest.SavedTestFragment;
+
 public class SavedFragmentAdapter extends FragmentStateAdapter {
     public SavedFragmentAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
@@ -15,11 +17,11 @@ public class SavedFragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new SavedTest();
+                return new SavedTestFragment();
             case 1:
                 return new BookmarkedQuestions();
         }
-        return new SavedTest();
+        return new SavedTestFragment();
     }
 
     @Override
