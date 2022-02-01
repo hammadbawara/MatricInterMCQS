@@ -13,12 +13,6 @@ public class SavedTest {
 
     }
 
-    public SavedTest(String className, String subject, String tableName) {
-        this.className = className;
-        this.subject = subject;
-        this.tableName = tableName;
-    }
-
     public String getClassName() {
         return className;
     }

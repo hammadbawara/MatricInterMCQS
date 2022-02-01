@@ -2,7 +2,6 @@ package com.hz_apps.matricintermcqs.Home.MCQS;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,7 +29,6 @@ import java.util.List;
 public class MCQsActivity extends AppCompatActivity {
 
     private TextView OptionA, OptionB, OptionC, OptionD, mcqs_statement, questionNum;
-    private AlertDialog.Builder alertdialog;
     ActivityMcqsBinding binding;
     private int position, numberOfMCQs;
     public static List<MCQS> mcqsList;
@@ -69,6 +67,7 @@ public class MCQsActivity extends AppCompatActivity {
 
         //Getting information from previous fragment
         String testTitle = getIntent().getStringExtra("TestTitle");
+
         position = getIntent().getIntExtra("Position", 0);
         mcqsList = (List<MCQS>) getIntent().getSerializableExtra("MCQsList");
 
@@ -100,7 +99,7 @@ public class MCQsActivity extends AppCompatActivity {
         progressDialog.dismiss();
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    @SuppressLint({"UseCompatLoadingForDrawables", "SetTextI18n"})
     private void setMCQsOnTextViews(){
         MCQS mcqs = mcqsList.get(position);
         mcqs_statement.setText(Html.fromHtml(mcqs.getStatement()));
@@ -123,14 +122,12 @@ public class MCQsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        alertdialog = new AlertDialog.Builder(MCQsActivity.this);
+        AlertDialog.Builder alertdialog = new AlertDialog.Builder(MCQsActivity.this);
         alertdialog.setMessage("Do you really want to end test?")
                 .setPositiveButton("Yes", (dialog, which) ->
                         MCQsActivity.super.onBackPressed())
                 .setNegativeButton("No", (dialog, which) -> {});
-        alertdialog.setNeutralButton("Save Test", (dialogInterface, i) -> {
-            askUserSaveTestNameDialog();
-        });
+        alertdialog.setNeutralButton("Save Test", (dialogInterface, i) -> askUserSaveTestNameDialog());
         alertdialog.show();
 
     }
@@ -154,11 +151,8 @@ public class MCQsActivity extends AppCompatActivity {
         binding.inputEditText.setText(calendar.getTime().toString());
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setView(binding.getRoot());
-        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        dialog.setNegativeButton("Cancel", (dialogInterface, i) -> {
 
-            }
         });
         dialog.setPositiveButton("Save", (dialogInterface, i) -> {
             String testTitle = binding.inputEditText.getText().toString();

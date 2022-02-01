@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -88,9 +87,6 @@ public class HomeMainFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
-        //Toast
-        Toast.makeText(getContext(), "Class Changed 👍", Toast.LENGTH_SHORT).show();
-
         //saved selected class in sharedPreference
         SelectedClass = selectedClass;
         requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE)
@@ -117,6 +113,7 @@ public class HomeMainFragment extends Fragment {
                 exitDialog.setView(dialogBinding.getRoot());
                 AlertDialog dialog = exitDialog.show();
                 dialogBinding.cancelBtnExitDialog.setOnClickListener(view -> {
+                    dbHelper.close();
                     dialog.dismiss();
                 });
                 dialogBinding.ExitBtnExitDialog.setOnClickListener(view -> {

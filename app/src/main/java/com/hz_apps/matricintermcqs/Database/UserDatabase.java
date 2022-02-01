@@ -16,6 +16,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class UserDatabase extends SQLiteOpenHelper {
+
+    private final String SAVED_TEST_TABLE = "savedTest";
+
     SQLiteDatabase db;
     public UserDatabase(@Nullable Context context) {
         super(context, "userDB.db", null, 1);
@@ -23,7 +26,7 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE savedTest(id INTEGER PRIMARY KEY AUTOINCREMENT, TestTitle TEXT, ClassName TEXT, SubjectName TEXT, TableName TEXT, Position INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE "+SAVED_TEST_TABLE+"(id INTEGER PRIMARY KEY AUTOINCREMENT, TestTitle TEXT, ClassName TEXT, SubjectName TEXT, TableName TEXT, Position INTEGER)");
     }
 
     @Override
@@ -33,7 +36,7 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     public List<SavedTest> getAllSavedTestsList(){
         db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM savedTest", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + SAVED_TEST_TABLE, null);
         List<SavedTest> savedTestList = new ArrayList<>();
         if (cursor.getCount() != 0){
             while (cursor.moveToNext()){
@@ -43,7 +46,7 @@ public class UserDatabase extends SQLiteOpenHelper {
                 test.setClassName(cursor.getString(2));
                 test.setSubject(cursor.getString(3));
                 test.setTableName(cursor.getString(4));
-                test.setPosition(5);
+                test.setPosition(cursor.getInt(5));
                 savedTestList.add(test);
             }
         }
@@ -76,7 +79,7 @@ public class UserDatabase extends SQLiteOpenHelper {
         values.put("SubjectName", SubjectName);
         values.put("TableName", tableName);
         values.put("Position", position);
-        db.insert("savedTest", null, values);
+        db.insert(SAVED_TEST_TABLE, null, values);
     }
 
     public List<MCQS> getSavedTest(String tableName){
@@ -103,6 +106,18 @@ public class UserDatabase extends SQLiteOpenHelper {
         db = getWritableDatabase();
         db.execSQL("DELETE FROM savedTest WHERE id=" + id );
         db.execSQL("DROP TABLE " + tableName);
+    }
+
+    public void updateSavedTest(List<MCQS> mcqsList, int position, int id, String tableName){
+
+        db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Position", position);
+        db.update(SAVED_TEST_TABLE, values, " id = " + id, null);
+
+        for (int i=0; i<mcqsList.size()-1;i++){
+            ContentValues value = new ContentValues();
+        }
     }
 
 
