@@ -81,7 +81,6 @@ public class HomeMainFragment extends Fragment {
         //set RecyclerView
         adapter = new BooksRecyclerView(getContext(), books, books_icons);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         //saved selected class in sharedPreference
         SelectedClass = selectedClass;
