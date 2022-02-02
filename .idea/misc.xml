@@ -7,9 +7,12 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_mcqs_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/correct_option_selected.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/wrong_mcqs_option.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/edit_text_stroke.xml" value="0.2245" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_back.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_next.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/mcqs_statement.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/negative_button_drawable.xml" value="0.2245" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/round_background_for_dialog.xml" value="0.2245" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/selected_mcqs_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/unselected_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -28,7 +31,7 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_select_chapter.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_test_setup.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/input_edit_text_view.xml" value="0.25" />
-        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/saved_test_view.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/saved_test_view.xml" value="0.6" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/subject_view.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/test_view.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />

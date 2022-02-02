@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ public class HomeMainFragment extends Fragment {
     static int SelectedClass;
     private final String FragmentName = "HomeMainFragment";
     BooksRecyclerView adapter;
+    public static int BookIcon;
 
 
     @Override
@@ -37,19 +40,12 @@ public class HomeMainFragment extends Fragment {
         binding = FragmentHomeMainBinding.inflate(getLayoutInflater());
         BackPressAction();
 
+        ShowBooksInRecyclerView showBooks = new ShowBooksInRecyclerView();
+        showBooks.start();
+
         recyclerView = binding.ChooseSubjectRV;
         class9_TVi = binding.class9TVi;
         class10_TVi = binding.class10TVi;
-
-        SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
-        changeClass(SelectedClass);
-
-        class9_TVi.setOnClickListener(view -> {
-            changeClass(1);
-        });
-        class10_TVi.setOnClickListener(view -> {
-            changeClass(2);
-        });
 
         return binding.getRoot();
     }
@@ -112,15 +108,30 @@ public class HomeMainFragment extends Fragment {
                 AlertDialog.Builder exitDialog = new AlertDialog.Builder(getContext());
                 exitDialog.setView(dialogBinding.getRoot());
                 AlertDialog dialog = exitDialog.show();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialogBinding.cancelBtnExitDialog.setOnClickListener(view -> {
                     dbHelper.close();
                     dialog.dismiss();
                 });
-                dialogBinding.ExitBtnExitDialog.setOnClickListener(view -> {
-                    requireActivity().finish();
-                });
+                dialogBinding.ExitBtnExitDialog.setOnClickListener(view -> requireActivity().finish());
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+    }
+
+    public class ShowBooksInRecyclerView extends Thread{
+
+        @Override
+        public void run() {
+            SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
+            changeClass(SelectedClass);
+
+            class9_TVi.setOnClickListener(view -> changeClass(1));
+            class10_TVi.setOnClickListener(view -> changeClass(2));
+
+            requireActivity().runOnUiThread(() -> {
+                binding.progressBarHomeMainFragment.setVisibility(View.GONE);
+            });
+        }
     }
 }

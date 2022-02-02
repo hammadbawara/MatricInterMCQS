@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -18,15 +19,17 @@ import java.util.List;
 public class UserDatabase extends SQLiteOpenHelper {
 
     private final String SAVED_TEST_TABLE = "savedTest";
+    private final Context context;
 
     SQLiteDatabase db;
     public UserDatabase(@Nullable Context context) {
         super(context, "userDB.db", null, 1);
+        this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE "+SAVED_TEST_TABLE+"(id INTEGER PRIMARY KEY AUTOINCREMENT, TestTitle TEXT, ClassName TEXT, SubjectName TEXT, TableName TEXT, Position INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS `savedTest` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `TestTitle` TEXT, `className` TEXT, `BookIcon` INTEGER, `tableName` TEXT, `position` INTEGER NOT NULL)");
     }
 
     @Override
@@ -44,7 +47,7 @@ public class UserDatabase extends SQLiteOpenHelper {
                 test.setId(cursor.getInt(0));
                 test.setTestTitle(cursor.getString(1));
                 test.setClassName(cursor.getString(2));
-                test.setSubject(cursor.getString(3));
+                test.setBookIcon(cursor.getInt(3));
                 test.setTableName(cursor.getString(4));
                 test.setPosition(cursor.getInt(5));
                 savedTestList.add(test);
@@ -53,7 +56,7 @@ public class UserDatabase extends SQLiteOpenHelper {
         return savedTestList;
     }
 
-    public void saveTest(List<MCQS> mcqsList, String TestTitle, int position, String ClassName, String SubjectName){
+    public void saveTest(List<MCQS> mcqsList, String TestTitle, int position, String ClassName, int BookIcon){
         db = getWritableDatabase();
         Calendar calendar = new GregorianCalendar();
         String tableName = "st" + calendar.getTimeInMillis();
@@ -75,10 +78,10 @@ public class UserDatabase extends SQLiteOpenHelper {
         }
         ContentValues values = new ContentValues();
         values.put("TestTitle", TestTitle);
-        values.put("ClassName", ClassName);
-        values.put("SubjectName", SubjectName);
-        values.put("TableName", tableName);
-        values.put("Position", position);
+        values.put("className", ClassName);
+        values.put("BookIcon", BookIcon);
+        values.put("tableName", tableName);
+        values.put("position", position);
         db.insert(SAVED_TEST_TABLE, null, values);
     }
 
@@ -86,16 +89,20 @@ public class UserDatabase extends SQLiteOpenHelper {
         db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
         List<MCQS> mcqsList = new ArrayList<>();
-        while (cursor.moveToNext()){
-            MCQS mcqs = new MCQS();
-            mcqs.setStatement(cursor.getString(1));
-            mcqs.setOptA(cursor.getString(2));
-            mcqs.setOptB(cursor.getString(3));
-            mcqs.setOptC(cursor.getString(4));
-            mcqs.setOptD(cursor.getString(5));
-            mcqs.setAns(cursor.getString(6).toCharArray()[0]);
-            mcqs.setUserAns(cursor.getString(7).toCharArray()[0]);
-            mcqsList.add(mcqs);
+        if (cursor.getCount()!=0) {
+            while (cursor.moveToNext()) {
+                MCQS mcqs = new MCQS();
+                mcqs.setStatement(cursor.getString(1));
+                mcqs.setOptA(cursor.getString(2));
+                mcqs.setOptB(cursor.getString(3));
+                mcqs.setOptC(cursor.getString(4));
+                mcqs.setOptD(cursor.getString(5));
+                mcqs.setAns(cursor.getString(6).toCharArray()[0]);
+                mcqs.setUserAns(cursor.getString(7).toCharArray()[0]);
+                mcqsList.add(mcqs);
+            }
+        }else{
+            Toast.makeText(context, "Test not found", Toast.LENGTH_SHORT).show();
         }
 
         return mcqsList;

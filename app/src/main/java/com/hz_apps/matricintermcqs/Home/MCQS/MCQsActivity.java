@@ -34,6 +34,8 @@ public class MCQsActivity extends AppCompatActivity {
     public static List<MCQS> mcqsList;
     MCQsFunctionality mcqsFun;
     TextView[] AllOptions;
+    String ClassName;
+    private int BookIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,8 @@ public class MCQsActivity extends AppCompatActivity {
 
         position = getIntent().getIntExtra("Position", 0);
         mcqsList = (List<MCQS>) getIntent().getSerializableExtra("MCQsList");
+        ClassName = getIntent().getStringExtra("ClassName");
+        BookIcon = getIntent().getIntExtra("BookIcon", 0);
 
         //set chapter name
         binding.chapterNameMcqsActivity.setText(testTitle);
@@ -158,7 +162,7 @@ public class MCQsActivity extends AppCompatActivity {
             String testTitle = binding.inputEditText.getText().toString();
             if (!testTitle.isEmpty()){
                 UserDatabase userDatabase = new UserDatabase(this);
-                userDatabase.saveTest(mcqsList, testTitle, position, "9th", "Physics");
+                userDatabase.saveTest(mcqsList, testTitle, position, ClassName, BookIcon);
             }
             else binding.inputEditText.setError("Assign some name to saved Test");
             MCQsActivity.super.onBackPressed();

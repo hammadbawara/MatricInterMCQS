@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
+import com.hz_apps.matricintermcqs.Home.HomeMain.HomeMainFragment;
 import com.hz_apps.matricintermcqs.Home.MCQS.MCQS;
 import com.hz_apps.matricintermcqs.Home.MCQS.MCQsActivity;
 import com.hz_apps.matricintermcqs.databinding.FragmentTestSetupBinding;
@@ -26,6 +27,7 @@ public class TestSetupFragment extends Fragment {
     TestGenerator testGenerator;
     Test[] tests;
     DBHelper dbHelper;
+    String[] Classes = new String[] {"9th", "10th"};
 
     TestsRecyclerAdapter.SetClickListenerOnTest listener;
     @Override
@@ -41,7 +43,7 @@ public class TestSetupFragment extends Fragment {
         selectedChapter = TestSetupFragmentArgs.fromBundle(getArguments()).getChapter();
 
 
-        String tableCode = "";
+        String tableCode;
         if (selectedChapter<10) tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
         else tableCode = "10" + selectedClass + "0" + selectedBook + selectedChapter;
         tableName = dbHelper.generateTableName(Long.parseLong(tableCode));
@@ -56,15 +58,14 @@ public class TestSetupFragment extends Fragment {
     }
 
     void setClickListener(){
-        listener = new TestsRecyclerAdapter.SetClickListenerOnTest() {
-            @Override
-            public void onClick(int position) {
-                List<MCQS> mcqsList = dbHelper.getMCQsWithRowId(tableName, tests[position].getStartPosition(), tests[position].getEndPosition());
-                Intent intent = new Intent(getActivity(), MCQsActivity.class);
-                intent.putExtra("MCQsList", (Serializable) mcqsList);
-                intent.putExtra("TestTitle", tests[position].getTitle());
-                startActivity(intent);
-            }
+        listener = position -> {
+            List<MCQS> mcqsList = dbHelper.getMCQsWithRowId(tableName, tests[position].getStartPosition(), tests[position].getEndPosition());
+            Intent intent = new Intent(getActivity(), MCQsActivity.class);
+            intent.putExtra("MCQsList", (Serializable) mcqsList);
+            intent.putExtra("TestTitle", tests[position].getTitle());
+            intent.putExtra("ClassName", Classes[selectedClass-1]);
+            intent.putExtra("BookIcon", HomeMainFragment.BookIcon);
+            startActivity(intent);
         };
     }
 }

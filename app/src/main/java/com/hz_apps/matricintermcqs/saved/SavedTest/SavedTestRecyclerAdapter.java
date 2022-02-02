@@ -1,18 +1,16 @@
 package com.hz_apps.matricintermcqs.saved.SavedTest;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.SavedTest;
-import com.hz_apps.matricintermcqs.Database.UserDatabase;
 import com.hz_apps.matricintermcqs.R;
 
 import java.util.List;
@@ -20,16 +18,19 @@ import java.util.List;
 public class SavedTestRecyclerAdapter extends RecyclerView.Adapter<SavedTestRecyclerAdapter.myViewHolder> {
 
     private final Context context;
-    private final List<SavedTest> savedTestList;
+    private List<SavedTest> savedTestList;
     private final SavedTestClickListener listener;
     private final SavedTestLongClickListener LongClickListener;
 
-    public SavedTestRecyclerAdapter(Context context, List<SavedTest> savedTestList, SavedTestClickListener listener,
+    public SavedTestRecyclerAdapter(Context context, SavedTestClickListener listener,
                                     SavedTestLongClickListener LongClickListener) {
         this.context = context;
-        this.savedTestList = savedTestList;
         this.listener = listener;
         this.LongClickListener = LongClickListener;
+    }
+
+    public void setSavedTestList(List<SavedTest> savedTestList) {
+        this.savedTestList = savedTestList;
     }
 
     @NonNull
@@ -42,7 +43,10 @@ public class SavedTestRecyclerAdapter extends RecyclerView.Adapter<SavedTestRecy
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         SavedTest savedTest = savedTestList.get(position);
-        holder.saved_test_title.setText(savedTest.getTestTitle());
+        holder.test_title.setText(savedTest.getTestTitle());
+        holder.className.setText(savedTest.getClassName());
+        holder.bookIcon.setImageResource(savedTest.getBookIcon());
+
     }
 
     @Override
@@ -51,10 +55,14 @@ public class SavedTestRecyclerAdapter extends RecyclerView.Adapter<SavedTestRecy
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        TextView saved_test_title;
+        TextView test_title;
+        TextView className;
+        ImageView bookIcon;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
-            saved_test_title = itemView.findViewById(R.id.saved_test_title_TView);
+            test_title = itemView.findViewById(R.id.saved_test_title_TView);
+            className = itemView.findViewById(R.id.class_name_saved_test);
+            bookIcon = itemView.findViewById(R.id.book_icon_saved_test);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }

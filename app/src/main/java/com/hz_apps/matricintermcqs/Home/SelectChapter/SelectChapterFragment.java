@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -34,6 +35,7 @@ public class SelectChapterFragment extends Fragment {
 
         return binding.getRoot();
     }
+
     void clickListener(){
         listener = (view, position, chapter) -> {
             NavDirections action = SelectChapterFragmentDirections
@@ -54,14 +56,11 @@ public class SelectChapterFragment extends Fragment {
             clickListener();
             //Setting up recyclerView
             RecyclerAdapterChapter adapter = new RecyclerAdapterChapter(getContext(), chapterList , listener);
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    RecyclerView recyclerview = binding.SelectChapterRV;
-                    recyclerview.setAdapter(adapter);
-                    recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    binding.progressBarSelectChapter.setVisibility(View.GONE);
-                }
+            requireActivity().runOnUiThread(() -> {
+                RecyclerView recyclerview = binding.SelectChapterRV;
+                recyclerview.setAdapter(adapter);
+                recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+                binding.progressBarSelectChapter.setVisibility(View.GONE);
             });
         }
     }
