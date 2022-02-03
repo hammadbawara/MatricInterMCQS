@@ -10,6 +10,7 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/edit_text_stroke.xml" value="0.2245" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_back.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_next.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/main_background.xml" value="0.2035" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/mcqs_statement.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/negative_button_drawable.xml" value="0.2245" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/round_background_for_dialog.xml" value="0.2245" />
@@ -20,10 +21,12 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_in.xml" value="0.2359375" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_splash_screen.xml" value="0.12708333333333333" />
-        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/chapter_view.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/chapter_view.xml" value="0.4" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/create_test_view.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/exit_from_app_dialog.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment__saved.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_choose_subject.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_create_test.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_exit_dialog.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_home_main.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/fragment_more.xml" value="0.25" />

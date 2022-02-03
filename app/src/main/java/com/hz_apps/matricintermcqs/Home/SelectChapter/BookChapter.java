@@ -1,6 +1,11 @@
 package com.hz_apps.matricintermcqs.Home.SelectChapter;
 
-public class BookChapter {
+import androidx.versionedparcelable.VersionedParcelize;
+
+import java.io.Serializable;
+
+@VersionedParcelize
+public class BookChapter implements Serializable {
     private int chapterNo;
     private String chapterName;
     private int numberOfQuestion;
