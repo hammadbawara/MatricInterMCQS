@@ -39,6 +39,9 @@
             app:exitAnim="@anim/slide_right_to_left_exit"
             app:popEnterAnim="@anim/slide_left_to_right_enter"
             app:popExitAnim="@anim/slide_left_to_right_exit"/>
+        <action
+            android:id="@+id/action_fragmentSelectChapter_to_createTestFragment"
+            app:destination="@id/createTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_Saved"
@@ -68,5 +71,11 @@
             android:name="ChapterName"
             app:argType="string"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/createTestFragment"
+        android:name="com.hz_apps.matricintermcqs.Home.SelectChapter.CreateOwnTest.CreateTestFragment"
+        android:label="fragment_create_test"
+        tools:layout="@layout/fragment_create_test" >
     </fragment>
 </navigation>
