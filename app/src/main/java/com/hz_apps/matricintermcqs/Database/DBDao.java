@@ -2,10 +2,7 @@ package com.hz_apps.matricintermcqs.Database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Query;
-
-import com.hz_apps.matricintermcqs.Home.MCQS.MCQS;
 
 import java.util.List;
 
