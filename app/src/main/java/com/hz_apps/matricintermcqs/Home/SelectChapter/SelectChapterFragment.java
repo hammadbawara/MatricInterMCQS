@@ -4,15 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
+import com.hz_apps.matricintermcqs.R;
 import com.hz_apps.matricintermcqs.databinding.FragmentSelectChapterBinding;
 
 import java.util.List;
@@ -39,8 +42,19 @@ public class SelectChapterFragment extends Fragment {
         ShowChaptersInRecyclerView showChapters = new ShowChaptersInRecyclerView();
         showChapters.start();
 
-        binding.nextBtnSelectChapter.setOnClickListener(v -> {
+        if (checkboxSelected) {
+            checkboxSelected = false;
+            setChapterInRecyclerView();
+            binding.createOwnTestFloatingBtn.setVisibility(View.VISIBLE);
+            binding.nextBtnSelectChapter.setVisibility(View.GONE);
+        }
 
+        binding.nextBtnSelectChapter.setOnClickListener(v -> {
+            Bundle args = new Bundle();
+            args.putSerializable("checkedChaptersList", checkedChapterList);
+            args.putInt("selectedBook", selectedBook);
+            args.putInt("selectedClass", selectedClass);
+            Navigation.findNavController(v).navigate(R.id.action_fragmentSelectChapter_to_createOwnTestFragment, args);
         });
 
         return view;
@@ -59,6 +73,7 @@ public class SelectChapterFragment extends Fragment {
 
             @Override
             public void CheckChangeListener(int position) {
+                //Save if it not saved already
                 if (checkedChapterList[position] == null){
                     checkedChapterList[position] = chapterList.get(position);
                 }else{
@@ -69,6 +84,11 @@ public class SelectChapterFragment extends Fragment {
                 }else{
                     binding.nextBtnSelectChapter.setVisibility(View.VISIBLE);
                 }
+            }
+
+            @Override
+            public void longClick(int position) {
+                enterIntoContextualMenu();
             }
         };
     }
@@ -93,9 +113,7 @@ public class SelectChapterFragment extends Fragment {
 
             //Floating Action Button
             binding.createOwnTestFloatingBtn.setOnClickListener(v -> {
-                checkboxSelected = true;
-                setChapterInRecyclerView();
-                binding.createOwnTestFloatingBtn.setVisibility(View.GONE);
+                enterIntoContextualMenu();
             });
         }
     }
@@ -113,6 +131,7 @@ public class SelectChapterFragment extends Fragment {
                     checkboxSelected = false;
                     setChapterInRecyclerView();
                     binding.createOwnTestFloatingBtn.setVisibility(View.VISIBLE);
+                    binding.nextBtnSelectChapter.setVisibility(View.GONE);
                 }else{
                     Navigation.findNavController(view).navigateUp();
                 }
@@ -129,5 +148,11 @@ public class SelectChapterFragment extends Fragment {
             }
         }
         return true;
+    }
+
+    private void enterIntoContextualMenu(){
+        checkboxSelected = true;
+        setChapterInRecyclerView();
+        binding.createOwnTestFloatingBtn.setVisibility(View.GONE);
     }
 }

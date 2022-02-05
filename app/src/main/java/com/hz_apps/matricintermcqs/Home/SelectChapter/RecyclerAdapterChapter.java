@@ -39,10 +39,11 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
     public void onBindViewHolder(@NonNull RecyclerAdapterChapter.myViewHolder holder, int position) {
         if (CheckBoxSelected){
             holder.checkBox.setVisibility(View.VISIBLE);
+            holder.chapter_number.setVisibility(View.INVISIBLE);
         }
         BookChapter chapter = chapterList.get(position);
         holder.chapter_name_TVi.setText(chapter.getChapterName());
-        holder.chapter_number.setText((String.valueOf(chapter.getChapterNo())));
+        holder.chapter_number.setText(chapter.getChapterNo() + ".");
     }
 
     @Override
@@ -50,7 +51,8 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
         return chapterList.size();
     }
 
-    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            CompoundButton.OnCheckedChangeListener, View.OnLongClickListener {
 
         TextView chapter_name_TVi, chapter_number;
         CheckBox checkBox;
@@ -62,6 +64,7 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
             checkBox = itemView.findViewById(R.id.checkBox_select_chapter);
             checkBox.setOnCheckedChangeListener(this);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -73,9 +76,16 @@ public class RecyclerAdapterChapter extends RecyclerView.Adapter<RecyclerAdapter
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
             listener.CheckChangeListener(getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+            listener.longClick(getAdapterPosition());
+            return true;
+        }
     }
     interface ChapterViewOnClick{
         void onClick(View view, int position, int chapter);
         void CheckChangeListener(int position);
+        void longClick(int position);
     }
 }

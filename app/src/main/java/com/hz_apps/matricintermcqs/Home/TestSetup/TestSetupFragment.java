@@ -43,10 +43,8 @@ public class TestSetupFragment extends Fragment {
         selectedChapter = TestSetupFragmentArgs.fromBundle(getArguments()).getChapter();
 
 
-        String tableCode;
-        if (selectedChapter<10) tableCode = "10" + selectedClass + "0" + selectedBook +"0" + selectedChapter;
-        else tableCode = "10" + selectedClass + "0" + selectedBook + selectedChapter;
-        tableName = dbHelper.generateTableName(Long.parseLong(tableCode));
+
+        tableName = dbHelper.generateTableName(selectedClass, selectedBook, selectedChapter);
         int numberOfQuestion = dbHelper.getNumberOfMCQs(tableName);
         tests = testGenerator.generateTest(numberOfQuestion);
 
