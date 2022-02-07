@@ -108,6 +108,7 @@ public class MCQsActivity extends AppCompatActivity {
             Intent intent = new Intent(MCQsActivity.this, MCQsResultActivity.class);
             intent.putExtra("MCQsList", (Serializable) mcqsList);
             startActivity(intent);
+            MCQsActivity.this.finish();
         });
         progressDialog.dismiss();
     }

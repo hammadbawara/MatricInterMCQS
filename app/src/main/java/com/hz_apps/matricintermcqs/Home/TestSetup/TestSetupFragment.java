@@ -17,6 +17,8 @@ import com.hz_apps.matricintermcqs.Home.MCQS.MCQsActivity;
 import com.hz_apps.matricintermcqs.databinding.FragmentTestSetupBinding;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class TestSetupFragment extends Fragment {
@@ -58,6 +60,7 @@ public class TestSetupFragment extends Fragment {
     void setClickListener(){
         listener = position -> {
             List<MCQS> mcqsList = dbHelper.getMCQsWithRowId(tableName, tests[position].getStartPosition(), tests[position].getEndPosition());
+            Collections.shuffle(mcqsList);
             Intent intent = new Intent(getActivity(), MCQsActivity.class);
             intent.putExtra("MCQsList", (Serializable) mcqsList);
             intent.putExtra("TestTitle", tests[position].getTitle());

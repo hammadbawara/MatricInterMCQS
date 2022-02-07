@@ -9,6 +9,7 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable-v24/wrong_mcqs_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/edit_text_stroke.xml" value="0.2245" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_back.xml" value="0.2275" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_check.xml" value="0.237" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/ic_next.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/main_background.xml" value="0.2035" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/mcqs_statement.xml" value="0.2275" />
@@ -18,7 +19,7 @@
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/drawable/unselected_option.xml" value="0.2275" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_mcqs.xml" value="0.25" />
-        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_mcqs_result.xml" value="0.25" />
+        <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_mcqs_result.xml" value="0.264" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_in.xml" value="0.2359375" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/hamma/AndroidStudioProjects/MatricInterMCQS/app/src/main/res/layout/activity_splash_screen.xml" value="0.12708333333333333" />
