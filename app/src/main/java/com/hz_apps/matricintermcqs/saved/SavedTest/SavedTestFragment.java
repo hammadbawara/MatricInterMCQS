@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBRepository;
@@ -29,7 +30,7 @@ public class SavedTestFragment extends Fragment {
     SavedTestRecyclerAdapter.SavedTestLongClickListener longClickListener;
     SavedTestRecyclerAdapter adapter;
     UserDatabase database;
-    DBRepository dbRepository;
+    SavedTestFragmentModel mViewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -38,19 +39,19 @@ public class SavedTestFragment extends Fragment {
 
         setClickListener();
         RecyclerView recyclerView = binding.recyclerViewSavedTest;
-        dbRepository = new DBRepository(requireActivity().getApplication());
 
         database = new UserDatabase(getContext());
         adapter = new SavedTestRecyclerAdapter(getContext(), listener, longClickListener);
 
-        dbRepository.getGetAllSavedTests().observe(getViewLifecycleOwner(), savedTests -> {
+        mViewModel = new ViewModelProvider(requireActivity()).get(SavedTestFragmentModel.class);
+
+        mViewModel.getAllSavedTests(requireActivity().getApplication()).observe(getViewLifecycleOwner(), savedTests -> {
             if (savedTests.size() == 0){
                 binding.noSavedTest.setVisibility(View.VISIBLE);
             }
             savedTestList = savedTests;
             recyclerView.setAdapter(adapter);
             adapter.setSavedTestList(savedTests);
-
         });
         binding.progressBarSavedTest.setVisibility(View.GONE);
 
@@ -79,7 +80,7 @@ public class SavedTestFragment extends Fragment {
         dialog.setNegativeButton("Cancel", (dialogInterface, i) -> {
         });
         dialog.setPositiveButton("Delete", (dialogInterface, i) -> {
-            dbRepository.deleteSavedTest(savedTest.getId());
+            mViewModel.deleteSavedTest(savedTest.getId());
             database.deleteSavedTest(savedTest.getId(), savedTest.getTableName());
             Toast.makeText(getContext(), "Delete Successfully", Toast.LENGTH_SHORT).show();
         }).show();

@@ -29,7 +29,7 @@ public class UserDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS `savedTest` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `TestTitle` TEXT, `className` TEXT, `BookIcon` INTEGER, `tableName` TEXT, `position` INTEGER NOT NULL)");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS `savedTest` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `TestTitle` TEXT, `className` TEXT, `BookIcon` INTEGER NOT NULL, `tableName` TEXT, `position` INTEGER NOT NULL)");
     }
 
     @Override

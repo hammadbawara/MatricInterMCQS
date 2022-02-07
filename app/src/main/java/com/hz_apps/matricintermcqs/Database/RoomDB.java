@@ -23,8 +23,12 @@ public abstract class RoomDB extends RoomDatabase {
     static RoomDB getInstance(final Context context){
         if (INSTANCE == null){
             synchronized (RoomDatabase.class){
+                if (INSTANCE == null)
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                        RoomDB.class, "userDB.db").build();
+                        RoomDB.class, "userDB.db")
+                        .fallbackToDestructiveMigration()
+                        .addCallback(sRoomDatabaseCallBack)
+                        .build();
             }
         }
         return INSTANCE;

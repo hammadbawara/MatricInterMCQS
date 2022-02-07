@@ -122,13 +122,12 @@ public class HomeMainFragment extends Fragment {
         @Override
         public void run() {
             SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
-            changeClass(SelectedClass);
-
-            class9_TVi.setOnClickListener(view -> changeClass(1));
-            class10_TVi.setOnClickListener(view -> changeClass(2));
 
             requireActivity().runOnUiThread(() -> {
                 binding.progressBarHomeMainFragment.setVisibility(View.GONE);
+                changeClass(SelectedClass);
+                class9_TVi.setOnClickListener(view -> changeClass(1));
+                class10_TVi.setOnClickListener(view -> changeClass(2));
             });
         }
     }

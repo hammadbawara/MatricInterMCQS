@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -36,16 +37,16 @@ public class SelectChapterFragment extends Fragment {
         view = binding.getRoot();
         recyclerview = binding.SelectChapterRV;
 
+        if (checkboxSelected) {
+            checkboxSelected = false;
+            binding.createOwnTestFloatingBtn.setVisibility(View.VISIBLE);
+            binding.nextBtnSelectChapter.setVisibility(View.GONE);
+            setChapterInRecyclerView();
+        }
+
         //This class is created because I want to run this in another thread.
         ShowChaptersInRecyclerView showChapters = new ShowChaptersInRecyclerView();
         showChapters.start();
-
-        if (checkboxSelected) {
-            checkboxSelected = false;
-            setChapterInRecyclerView();
-            binding.createOwnTestFloatingBtn.setVisibility(View.VISIBLE);
-            binding.nextBtnSelectChapter.setVisibility(View.GONE);
-        }
 
         binding.nextBtnSelectChapter.setOnClickListener(v -> {
             Bundle args = new Bundle();
@@ -94,12 +95,6 @@ public class SelectChapterFragment extends Fragment {
     private class ShowChaptersInRecyclerView extends Thread{
         @Override
         public void run() {
-            requireActivity().runOnUiThread(() -> {
-                onBackPress();
-                setChapterInRecyclerView();
-                binding.progressBarSelectChapter.setVisibility(View.GONE);
-            });
-
             //Getting information from previous Fragment
             selectedClass = SelectChapterFragmentArgs.fromBundle(getArguments()).getClassName();
             selectedBook = SelectChapterFragmentArgs.fromBundle(getArguments()).getBook();
@@ -113,11 +108,17 @@ public class SelectChapterFragment extends Fragment {
             binding.createOwnTestFloatingBtn.setOnClickListener(v -> {
                 enterIntoContextualMenu();
             });
+
+            requireActivity().runOnUiThread(() -> {
+                onBackPress();
+                setChapterInRecyclerView();
+                binding.progressBarSelectChapter.setVisibility(View.GONE);
+            });
         }
     }
 
     private void setChapterInRecyclerView(){
-        adapter = new RecyclerAdapterChapter(getContext(), chapterList , listener, checkboxSelected);
+        adapter = new RecyclerAdapterChapter(getContext(), chapterList, listener, checkboxSelected);
         recyclerview.setAdapter(adapter);
     }
 

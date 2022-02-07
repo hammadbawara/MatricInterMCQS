@@ -10,11 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatricInterMCQS">
         <activity
+            android:name=".Home.MCQS.Result.MCQsResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignInAndSignUp.SignUpActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SignInAndSignUp.SignInActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Splash_Screen"
             android:exported="true">

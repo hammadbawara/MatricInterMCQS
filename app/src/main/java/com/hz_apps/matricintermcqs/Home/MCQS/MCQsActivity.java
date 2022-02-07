@@ -2,9 +2,12 @@ package com.hz_apps.matricintermcqs.Home.MCQS;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,17 +15,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hz_apps.matricintermcqs.Database.UserDatabase;
+import com.hz_apps.matricintermcqs.Home.MCQS.Result.MCQsResultActivity;
 import com.hz_apps.matricintermcqs.databinding.ActivityMcqsBinding;
 import com.hz_apps.matricintermcqs.databinding.InputEditTextViewBinding;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
     /*
     position - This is a variable that change with the MCQs. It tells us that on which MCQs user is right now.
-    MCQsFunctionality (mcqsFun) - This is class that made for hiding complexity. In this class many function are addedd
-                for lowering code on MainActivity class.
+    MCQsFunctionality (mcqsFun) - This is class that made for hiding complexity. In this class many function are added
+    for lowering code on MainActivity class.
      */
 
 
@@ -36,6 +41,7 @@ public class MCQsActivity extends AppCompatActivity {
     TextView[] AllOptions;
     String ClassName;
     private int BookIcon;
+    private Button finishBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class MCQsActivity extends AppCompatActivity {
         OptionD = binding.OptionD;
         questionNum = binding.questionNum;
         mcqs_statement = binding.mcqsStatement;
+        finishBtn = binding.finishBtnMcqsActivity;
         AllOptions = new TextView[] {OptionA, OptionB, OptionC, OptionD};
 
         /*
@@ -86,8 +93,6 @@ public class MCQsActivity extends AppCompatActivity {
             if (position<numberOfMCQs-1){
                 position++;
                 setMCQsOnTextViews();
-            }else{
-                Toast.makeText(this, "No more MCQs", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -96,9 +101,13 @@ public class MCQsActivity extends AppCompatActivity {
             if (position>0){
                 position--;
                 setMCQsOnTextViews();
-            }else{
-                Toast.makeText(this, "No more MCQs", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        finishBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MCQsActivity.this, MCQsResultActivity.class);
+            intent.putExtra("MCQsList", (Serializable) mcqsList);
+            startActivity(intent);
         });
         progressDialog.dismiss();
     }
@@ -116,10 +125,21 @@ public class MCQsActivity extends AppCompatActivity {
         mcqsFun.setAllOptionsUnselected(AllOptions);
         //set option as selected that user last time selected
         TextView option = mcqsFun.getOptionByChar(AllOptions, mcqs.getUserAns());
-        if (option != null) mcqsFun.setOptionSelected(option);
+        if (option != null) mcqsFun.checkMCQsOption(AllOptions, mcqs.getUserAns(), mcqs.getAns());
 
         //Update question number on the top right corner of Toolbar
         questionNum.setText(position+1+"/"+numberOfMCQs);
+
+        binding.nextBtn.setVisibility(View.VISIBLE);
+        finishBtn.setVisibility(View.GONE);
+        binding.backBtn.setVisibility(View.VISIBLE);
+        if (position==0){
+            binding.backBtn.setVisibility(View.GONE);
+        }
+        if (position == numberOfMCQs-1){
+            binding.nextBtn.setVisibility(View.GONE);
+            finishBtn.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -143,8 +163,10 @@ public class MCQsActivity extends AppCompatActivity {
             options[i].setOnClickListener(view -> {
                 //Unselect Previous Option
                 MCQS mcqs = mcqsList.get(position);
-                mcqs.setUserAns(choice[finalI]);
-                mcqsFun.checkMCQsOption(options, mcqs.getUserAns(), mcqs.getAns());
+                if (mcqs.getUserAns() == 'N') {
+                    mcqs.setUserAns(choice[finalI]);
+                    mcqsFun.checkMCQsOption(options, mcqs.getUserAns(), mcqs.getAns());
+                }
             });
         }
     }
