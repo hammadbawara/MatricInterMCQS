@@ -14,4 +14,6 @@
     <color name="light_blue">#EEF7FF</color>
     <color name="light_green">#00C808</color>
     <color name="light_red">#FF1100</color>
+
+    <color name="testing_color">#6C6C6C</color>
 </resources>

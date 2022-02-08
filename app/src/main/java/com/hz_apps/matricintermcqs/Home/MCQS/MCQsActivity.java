@@ -69,9 +69,9 @@ public class MCQsActivity extends AppCompatActivity {
         AllOptions = new TextView[] {OptionA, OptionB, OptionC, OptionD};
 
         /*
-        When someone click on option. First it will remove drawable from all the options
-        then it will set 'red' on the selected option. After that it set 'green' on the right option.
-        if user clicked (or selected) on right option then that option color become 'green' else it remain red.
+         When someone click on option. First it will remove drawable from all the options
+         then it will set 'red' on the selected option. After that it set 'green' on the right option.
+         if user clicked (or selected) on right option then that option color become 'green' else it remain red.
          */
         setClickListenerOnAllOptions(AllOptions);
 
