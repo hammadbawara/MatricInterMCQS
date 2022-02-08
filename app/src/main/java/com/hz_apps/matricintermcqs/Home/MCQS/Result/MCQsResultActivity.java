@@ -27,6 +27,7 @@ public class MCQsResultActivity extends AppCompatActivity {
         binding.wrongMcqsResult.setText(String.valueOf(WrongAnswers));
         binding.unattemptedMcqsResult.setText(String.valueOf(Unattempted));
         binding.accuracyResultActivity.setText(accuracy + "%");
+        binding.pointsResultActivity.setText(String.valueOf(CorrectAnswers*10));
 
     }
 
@@ -48,6 +49,6 @@ public class MCQsResultActivity extends AppCompatActivity {
         //Finding percentage
         float attemptedQuestions = (float) Attempted;
         float correctAnswers = (float) CorrectAnswers;
-        accuracy = (int) (correctAnswers/attemptedQuestions)*100;
+        accuracy = (int) ((correctAnswers/attemptedQuestions)*100);
     }
 }

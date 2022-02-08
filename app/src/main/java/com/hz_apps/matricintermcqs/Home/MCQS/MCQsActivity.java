@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -110,6 +111,15 @@ public class MCQsActivity extends AppCompatActivity {
             startActivity(intent);
             MCQsActivity.this.finish();
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.optionsScrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+                @Override
+                public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    System.out.println("scrollX :" + scrollX + "  ScrollY: "+ scrollY + "  oldScrollX: " + oldScrollX + "  oldScrollY: " + oldScrollY);
+                }
+            });
+        }
         progressDialog.dismiss();
     }
 
