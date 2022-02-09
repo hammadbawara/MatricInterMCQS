@@ -15,7 +15,6 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hz_apps.matricintermcqs.Database.DBHelper;
@@ -123,13 +122,12 @@ public class HomeMainFragment extends Fragment {
         @Override
         public void run() {
             SelectedClass = requireActivity().getSharedPreferences(FragmentName, Context.MODE_PRIVATE).getInt("className", 1);
-            changeClass(SelectedClass);
-
-            class9_TVi.setOnClickListener(view -> changeClass(1));
-            class10_TVi.setOnClickListener(view -> changeClass(2));
 
             requireActivity().runOnUiThread(() -> {
                 binding.progressBarHomeMainFragment.setVisibility(View.GONE);
+                changeClass(SelectedClass);
+                class9_TVi.setOnClickListener(view -> changeClass(1));
+                class10_TVi.setOnClickListener(view -> changeClass(2));
             });
         }
     }

@@ -5,7 +5,8 @@ import java.io.Serializable;
 public class MCQS implements Serializable {
     private int id;
     private String statement, optA, optB, optC, optD;
-    private char ans, userAns;
+    private char ans;
+    private char userAns = 'N';
 
     public MCQS(){
 
